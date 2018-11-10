@@ -14,11 +14,11 @@ struct List
 	Element* toKill = nullptr;
 };
 
-void addToList(int nuberOfWarriors, List &list)
+void addToList(int numberOfWarriors, List &list)
 {
 	auto elemToAdd = new Element{ 1, nullptr };
 	list.head = elemToAdd;
-	for (int i = 2; i < nuberOfWarriors + 1; ++i)
+	for (int i = 2; i < numberOfWarriors + 1; ++i)
 	{
 		auto elemToAddCurr = new Element{ i,  nullptr };
 		elemToAdd->next = elemToAddCurr;
@@ -82,19 +82,14 @@ int main()
 		printf("Program doesn't work :(");
 		return -1;
 	}
-	else
-	{
-		int numberOfWarriors = 0;
-		int victimNumber = 0;
-
-		printf("Enter the number of warriors:   ");
-		scanf("%d", &numberOfWarriors);
-		printf("Enter the number of victim:   ");
-		scanf("%d", &victimNumber);
-		
-		List list;
-		addToList(numberOfWarriors, list);
-		printf("Number of survivivor:   %d", whoSurvive(victimNumber, list));
-	}
+	int numberOfWarriors = 0;
+	int victimNumber = 0;
+	printf("Enter the number of warriors:   ");
+	scanf("%d", &numberOfWarriors);
+	printf("Enter the number of victim:   ");
+	scanf("%d", &victimNumber);
+	List list;
+	addToList(numberOfWarriors, list);
+	printf("Number of survivivor:   %d", whoSurvive(victimNumber, list));
 	return 0;
 }
