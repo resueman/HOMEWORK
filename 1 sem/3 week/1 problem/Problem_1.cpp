@@ -79,7 +79,7 @@ int main()
 {
 	if (!test())
 	{
-		printf("%s", "Program doesn't work");
+		printf("Program doesn't work");
 		return 1;
 	}
 
