@@ -1,38 +1,34 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
-
+#include <conio.h>//!!!!!!!!!!!!!!!!!
 struct Element
 {
 	int data = 0;
 	Element* next = nullptr;
-	Element* prev = nullptr;
 };
 
 struct List
 {
 	Element* head = nullptr;
-	Element* tail = nullptr;
 	Element* toKill = nullptr;
 }list;
 
 void addToList(int nuberOfWarriors, List &list)
 {
-	struct Element* elemToAddPrev = new Element{ 1, nullptr, nullptr };
-	list.head = elemToAddPrev;
-	list.tail = elemToAddPrev;
+	auto elemToAdd = new Element{ 1, nullptr };
+	list.head = elemToAdd;
 	for (int i = 2; i < nuberOfWarriors + 1; ++i)
 	{
-		auto elemToAddCurr = new Element{ i, list.head, nullptr };
-		elemToAddPrev->next = elemToAddCurr;
-		elemToAddCurr->prev = elemToAddPrev;
-		list.tail = elemToAddCurr;
-		elemToAddPrev = elemToAddCurr;
+		auto elemToAddCurr = new Element{ i,  nullptr };
+		elemToAdd->next = elemToAddCurr;
+		elemToAdd = elemToAddCurr;
 	}
-	list.head->prev = list.tail;
+	elemToAdd->next = list.head;
 }
 
-int whoSurvive(int victimNumber)
+
+/*int whoSurvive(int victimNumber)
 {
 	list.toKill = list.head;
 	while (list.head != list.tail)
@@ -74,16 +70,16 @@ bool test()
 		testFunc(4, 2) == 1 && testFunc(1, 5) == 1 && testFunc(5, 7) == 4 && testFunc(10, 2) == 5 &&
 		testFunc(7, 2) == 7 && testFunc(2, 2) == 1 && testFunc(2, 3) == 2);
 }
-
+*/
 int main()
 {
-	if (!test())
+	/*if (!test())
 	{
 		printf("Program doesn't work :(");
 		return -1;
 	}
 	else
-	{
+	{*/
 		int numberOfWarriors = 0;
 		int victimNumber = 0;
 
@@ -93,7 +89,9 @@ int main()
 		scanf("%d", &victimNumber);
 
 		addToList(numberOfWarriors, list);
-		printf("Number of survivivor:   %d", whoSurvive(victimNumber));
-	}
+		//printf("Number of survivivor:   %d", whoSurvive(victimNumber));
+	//}
+
+	_getch();//!!!!!!!!!
 	return 0;
 }
