@@ -47,13 +47,13 @@ void quickSort(int* arr, int left, int right)
 {	
 	if (right > left)
 	{
-		int pivot = partition(arr, left, right);
 		if (right - left + 1 < 10)
 		{
 			insertionSort(arr, left, right);
 		}
 		else
 		{
+			int pivot = partition(arr, left, right);
 			quickSort(arr, left, pivot - 1);
 			quickSort(arr, pivot + 1, right);
 		}
@@ -95,6 +95,6 @@ int main()
 	printArr(arr, n);
 	quickSort(arr, 0, n - 1);
 	printArr(arr, n);
-	
+	delete[] arr;
 	return 0;
 }
