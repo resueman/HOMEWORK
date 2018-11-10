@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <utility>
-
+#include <conio.h>
 using namespace std;
 
 void printArr(int* arr, int length)
@@ -36,7 +36,7 @@ void insertionSort(int* arr, int left, int right)
 	for (int i = left; i < right; ++i)
 	{
 		int j = i + 1;
-		while ((arr[j] < arr[j - 1]) && (j > 0))
+		while ((arr[j] < arr[j - 1]) && (j > left))
 		{
 			swap(arr[j], arr[j - 1]);
 			j--;
@@ -48,43 +48,43 @@ void quickSort(int* arr, int left, int right)
 {
 	if (right > left)
 	{
-		int pivot = partition(arr, left, right);
 		if (right - left + 1 < 10)
 		{
 			insertionSort(arr, left, right);
 		}
 		else
 		{
+			int pivot = partition(arr, left, right);
 			quickSort(arr, left, pivot - 1);
 			quickSort(arr, pivot + 1, right);
 		}
 	}
 }
 
-int binarySearch(int* arr, int left, int right, int desireK)
+bool binarySearch(int* arr, int left, int right, int desireK)
 {
-	int middle = (left + right) / 2;
+	const int middle = (left + right) / 2;
 	if (right >= left) 
 	{	
 		if (desireK > arr[middle]) 
 		{
-			binarySearch(arr, middle + 1, right, desireK);
+			return binarySearch(arr, middle + 1, right, desireK);
 		}
 		else
 		{
 			if (desireK < arr[middle])
 			{
-				binarySearch(arr, left, middle - 1, desireK);
+				return binarySearch(arr, left, middle - 1, desireK);
 			}
 			else
 			{
-				return 1;
+				return true;
 			}
 		}
 	}
 	else
 	{
-		return 0;
+		return false;
 	}
 }
 
@@ -138,7 +138,7 @@ int main()
 	for (int i = 0; i < k; ++i)
 	{
 		int current = rand() % 30;
-		if (binarySearch(arr, 0, n - 1, current) == 1)
+		if (binarySearch(arr, 0, n - 1, current))
 		{
 			printf("%d.  %d is found\n", i, current);
 		}
@@ -147,6 +147,7 @@ int main()
 			printf("%d.  %d not found\n", i, current);
 		}
 	}
+	_getch();
 	delete[] arr;
 	return 0;
 }
