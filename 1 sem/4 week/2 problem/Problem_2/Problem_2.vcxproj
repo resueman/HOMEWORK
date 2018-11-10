@@ -115,10 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="quick_sort.h" />
+    <ClInclude Include="quickSort.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Search_most_common_element.cpp" />
+    <ClCompile Include="quickSortFuncImplementation.cpp" />
+    <ClCompile Include="searchMostCommonElement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
