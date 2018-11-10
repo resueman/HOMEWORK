@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <utility>
-#include <conio.h>
+
 using namespace std;
 
 void printArr(int* arr, int length)
@@ -147,7 +147,7 @@ int main()
 			printf("%d.  %d not found\n", i, current);
 		}
 	}
-	_getch();
+
 	delete[] arr;
 	return 0;
 }
