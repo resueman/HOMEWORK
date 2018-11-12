@@ -11,7 +11,6 @@ struct Element
 struct List
 {
 	Element* head = nullptr;
-	Element* toKill = nullptr;
 };
 
 void addToList(int numberOfWarriors, List &list)
@@ -37,22 +36,22 @@ Element* pointerOnPrevious(List &list, Element* current)
 	return previous;
 }
 
-int whoSurvive(int victimNumber, List list)
+int whoSurvive(int victimNumber, List &list)
 {
-	list.toKill = list.head;
+	Element* toKill = list.head;
 	while (list.head->next != list.head)
 	{
 		for (int i = 1; i < victimNumber; ++i)
 		{
-			list.toKill = list.toKill->next;
+			toKill = toKill->next;
 		}
-		if (list.toKill == list.head) 
+		if (toKill == list.head) 
 		{
 			list.head = list.head->next;
 		}
-		pointerOnPrevious(list, list.toKill)->next = list.toKill->next;
-		Element *temp = list.toKill;
-		list.toKill = list.toKill->next;
+		pointerOnPrevious(list, toKill)->next = toKill->next;
+		Element *temp = toKill;
+		toKill = toKill->next;
 		delete temp;
 	}
 	int const survivorNumber = list.head->data;
