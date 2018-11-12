@@ -115,12 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functionsImplementation.cpp" />
+    <ClCompile Include="listFunctions.cpp" />
     <ClCompile Include="Problem_1.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functionsDeclaration.h" />
+    <ClInclude Include="listFunctions.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

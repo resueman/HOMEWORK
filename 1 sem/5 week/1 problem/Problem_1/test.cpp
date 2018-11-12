@@ -1,6 +1,7 @@
 #include <string>
-#include "functionsDeclaration.h"
+#include "listFunctions.h"
 #include "test.h"
+
 bool test()
 {
 	List list;
@@ -30,6 +31,5 @@ bool test()
 		resultWeGot += std::to_string(current->data) + " ";
 		current = current->next;
 	}
-	deleteList(list);
 	return resultWeGot == desiredResult;
 }
