@@ -15,17 +15,17 @@ void printData(int* arrayOfData, int length)
 int searchMostFrequentElement(int* arr, int length)
 {
 	int mostFrequent = -111;
-	int max = 1;
+	int maxNumberOfRepet = 1;
 	int counter = 1;
 	for (int i = 1; i < length; ++i)
 	{
 		if (arr[i] == arr[i - 1])
 		{
 			counter++;
-			if (counter >= max)
+			if (counter >= maxNumberOfRepet)
 			{
 				mostFrequent = arr[i - 1];
-				max = counter;
+				maxNumberOfRepet = counter;
 			}
 		}
 		else
@@ -34,6 +34,27 @@ int searchMostFrequentElement(int* arr, int length)
 		}
 	}
 	return mostFrequent;
+}
+
+int* getDataFromFile(FILE* file, int &n)
+{
+	fscanf(file, "%d", &n);
+	int* arrayOfData = new int [n] {};
+
+	int lineNumber = 0;
+	while (!feof(file))
+	{
+		int buffer = 0;
+		const int readBytes = fscanf(file, "%d", &buffer);
+		if (readBytes < 0)
+		{
+			break;
+		}
+		arrayOfData[lineNumber] = buffer;
+		lineNumber++;
+	}
+	fclose(file);
+	return arrayOfData;
 }
 
 bool test()
@@ -52,32 +73,14 @@ int main()
 		printf("%s", "Program doesn't work");
 		return 1;
 	}
-
 	FILE *file = fopen("test.txt", "r");
-	if (!file) 
+	if (!file)
 	{
 		printf("file not found!");
 		return 1;
 	}
-
 	int n = 0;
-	fscanf(file, "%d", &n);
-	int* arrayOfData = new int [n] {};
-	
-	int lineNumber = 0;
-	while (!feof(file))
-	{
-		int buffer = 0;
-		const int readBytes = fscanf(file, "%d", &buffer);
-		if (readBytes < 0) 
-		{
-			break;
-		}
-		arrayOfData[lineNumber] = buffer;
-		lineNumber++;
-	}
-	fclose(file);
-	
+	int* arrayOfData = getDataFromFile(file, n);
 	printf("%s", "Original array\n");
 	printData(arrayOfData, n);
 	quickSort(arrayOfData, 0, n - 1);
