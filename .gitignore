@@ -33,7 +33,6 @@
 **/.vs
 *.vcxproj	
 *.vcxproj.filters
-*.vcxproj.user
 *.log
 *.idb
 *.pdb
