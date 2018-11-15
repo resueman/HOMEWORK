@@ -10,7 +10,7 @@ void addRecord(int &numberOfRecords, Person* man)///1
 	scanf("%s", &man[numberOfRecords].name);
 	printf(" Enter telephone number:   ");
 	scanf("%s", &man[numberOfRecords].telephoneNumber);
-	(numberOfRecords)++;
+	numberOfRecords++;
 }
 
 void printAllRecords(int numberOfRecords, Person* man)///2
