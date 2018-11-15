@@ -6,7 +6,7 @@
 
 void interaction(int numberOfRecords, Person *man)
 {
-	int userChoice;
+	int userChoice = 0;
 	do
 	{
 		printf(" Choose option, please \n\n");
