@@ -30,10 +30,9 @@
 *.exe
 *.out
 *.app
-*.vcxproj	
-*.vcxproj.filters
 *.vcxproj.user
 *.log
 *.idb
 *.pdb
 **/Debug
+**/.vs
