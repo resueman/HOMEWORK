@@ -1,6 +1,0 @@
-qwerty 123456
-qwert 12345
-qwer 1234
-qwe 123
-qw 12
-q 1
