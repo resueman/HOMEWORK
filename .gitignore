@@ -31,8 +31,9 @@
 *.out
 *.app
 *.vcxproj.user
+**/.vs
 *.log
 *.idb
 *.pdb
 **/Debug
-**/.vs
+**/x64
