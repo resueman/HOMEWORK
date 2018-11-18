@@ -1,14 +1,13 @@
 #include "interaction.h"
-//#include "test.h"
+#include "test.h"
 
 int main()
 {
-	/*if (!test())
+	if (!test())
 	{
-		cout << "Program doesn't work";
-		return -1;
-	}*/
-	
+		std::cout << "Program doesn't work";
+		return -11;
+	}
 	interaction();
 	return 0;
 }

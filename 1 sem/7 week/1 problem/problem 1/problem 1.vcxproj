@@ -119,12 +119,17 @@
     <ClCompile Include="interaction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="print.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interaction.h" />
     <ClInclude Include="print.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="tree.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

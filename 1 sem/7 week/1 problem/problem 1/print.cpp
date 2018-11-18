@@ -1,7 +1,7 @@
 #include "print.h"
 #include <iostream>
 
-void printAscendingOrder(Set* set, Node* node)
+void printDescendingOrder(Set* set, Node* node, std::string &resultStr)
 {
 	if (isEmpty(set))
 	{
@@ -10,16 +10,16 @@ void printAscendingOrder(Set* set, Node* node)
 	}
 	if (node->rightChild != nullptr)
 	{
-		printAscendingOrder(set, node->rightChild);
+		printDescendingOrder(set, node->rightChild, resultStr);
 	}
-	std::cout << node->data << "  ";
+	resultStr += std::to_string(node->data) + " ";
 	if (node->leftChild != nullptr)
 	{
-		printAscendingOrder(set, node->leftChild);
+		printDescendingOrder(set, node->leftChild, resultStr);
 	}
 }
 
-void printDescendingOrder(Set* set, Node* node)
+void printAscendingOrder(Set* set, Node* node, std::string &resultStr)
 {
 	if (isEmpty(set))
 	{
@@ -28,11 +28,11 @@ void printDescendingOrder(Set* set, Node* node)
 	}
 	if (node->leftChild != nullptr)
 	{
-		printDescendingOrder(set, node->leftChild);
+		printAscendingOrder(set, node->leftChild, resultStr);
 	}
-	std::cout << node->data << "  ";
+	resultStr += std::to_string(node->data) + " ";
 	if (node->rightChild != nullptr)
 	{
-		printDescendingOrder(set, node->rightChild);
+		printAscendingOrder(set, node->rightChild, resultStr);
 	}
 }

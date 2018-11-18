@@ -78,11 +78,19 @@ void interaction()
 			case3(set);
 			break;
 		case 4:
-			printAscendingOrder(set, set->root);
-			break;
+		{
+			std::string str = "";
+			printAscendingOrder(set, set->root, str);
+			cout << str;
+		}
+		break;
 		case 5:
-			printDescendingOrder(set, set->root);
-			break;
+		{
+			std::string str = "";
+			printDescendingOrder(set, set->root, str);
+			cout << str;
+		}
+		break;
 		case 6:
 			system("cls");
 			printOptions();
