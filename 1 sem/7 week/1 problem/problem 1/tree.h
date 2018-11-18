@@ -1,5 +1,12 @@
 #pragma once
 
+struct Node;
+
+struct Set
+{
+	Node* root;
+};
+
 Set* createSet();
 void deleteSet(Set* set, Node* node);
 bool addToSet(Set* set, int const  data);

@@ -7,11 +7,6 @@ struct Node
 	Node* rightChild;
 };
 
-struct Set
-{
-	Node* root;
-};
-
 Set* createSet()
 {
 	return new Set;
