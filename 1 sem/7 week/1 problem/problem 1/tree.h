@@ -23,5 +23,3 @@ bool isEmpty(Set* set);
 void removeNode(Node*& current, int const data);
 int maximum(Node* current);
 void addNode(Node* node, int const data);
-void printDescendingOrder(Set* set, Node* node);
-void printAscendingOrder(Set* set, Node* node);
