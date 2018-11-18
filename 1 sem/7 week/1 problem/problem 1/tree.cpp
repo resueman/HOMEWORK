@@ -1,12 +1,5 @@
 #include "tree.h"
 
-struct Node
-{
-	int data = 0;
-	Node* leftChild;
-	Node* rightChild;
-};
-
 Set* createSet()
 {
 	return new Set;
@@ -187,4 +180,14 @@ int maximum(Node* current)
 bool isEmpty(Set* set)
 {
 	return set->root == nullptr;
+}
+
+void printDescendingOrder(Set* set)
+{
+
+}
+
+void printAscendingOrder(Set* set)
+{
+
 }
