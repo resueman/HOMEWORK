@@ -181,13 +181,3 @@ bool isEmpty(Set* set)
 {
 	return set->root == nullptr;
 }
-
-void printDescendingOrder(Set* set)
-{
-
-}
-
-void printAscendingOrder(Set* set)
-{
-
-}

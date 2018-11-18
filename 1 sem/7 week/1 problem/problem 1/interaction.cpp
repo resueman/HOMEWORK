@@ -1,4 +1,5 @@
-#include "tree.h"
+#include "interaction.h"
+#include "print.h"
 #include <iostream>
 
 using namespace std;
@@ -77,17 +78,17 @@ void interaction()
 			case3(set);
 			break;
 		case 4:
-			printAscendingOrder(set);
+			printAscendingOrder(set, set->root);
 			break;
 		case 5:
-			printDescendingOrder(set);
+			printDescendingOrder(set, set->root);
 			break;
 		case 6:
 			system("cls");
 			printOptions();
 			break;
 		default:
-			std::cout << "No such option";
+			cout << "No such option";
 			break;
 		}
 	} while (userChoice != 0);

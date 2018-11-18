@@ -118,10 +118,12 @@
   <ItemGroup>
     <ClCompile Include="interaction.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="print.cpp" />
     <ClCompile Include="tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interaction.h" />
+    <ClInclude Include="print.h" />
     <ClInclude Include="tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
