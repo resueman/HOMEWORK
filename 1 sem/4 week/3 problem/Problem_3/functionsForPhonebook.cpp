@@ -8,14 +8,14 @@ void addRecord(int &numberOfRecords, Person* man)///1
 	scanf("%s", &man[numberOfRecords].name);
 	printf(" Enter telephone number:   ");
 	scanf("%s", &man[numberOfRecords].telephoneNumber);
-	(numberOfRecords)++;
+	numberOfRecords++;
 }
 
 void printAllRecords(int numberOfRecords, Person* man)///2
 {
 	if (numberOfRecords == 0)
 	{
-		printf(" Phonebook is empty\n\n");
+		printf(" Phonebook is empty");
 	}
 	else
 	{
@@ -67,6 +67,6 @@ void saveToFile(int currentNumberOfRecords, Person* man)///5
 	{
 		fprintf(out, "%s   %s\n", man[i].name, man[i].telephoneNumber);
 	}
-	printf(" Changes saved\n");
+	printf(" Changes saved");
 	fclose(out);
 }
