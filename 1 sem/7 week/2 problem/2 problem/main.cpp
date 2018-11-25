@@ -34,7 +34,7 @@ Tree* createTree(FILE *file)
 Tree* readFromFile(const char* fileName)
 {
 	FILE *file = fopen(fileName, "r");
-	if(!file)
+	if (!file)
 	{
 		cout << "File not found";
 	}
@@ -50,7 +50,30 @@ void printTree(Tree* tree, Node* node)
 		std::cout << "Tree is empty";
 		return;
 	}
-	std::cout << node->data << "  ";
+	//std::cout << node->data << "  ";
+	if (isOperator(node->data))
+	{
+		switch (node->data)
+		{
+		case '+':
+			std::cout << "( + ";
+			break;
+		case '-':
+			std::cout << "( - ";
+			break;
+		case '*':
+			std::cout << "( * ";
+			break;
+		case '/':
+			std::cout << " (/ ";
+			break;
+		}
+	}
+	else
+	{
+		std::cout << node->data << " ";
+	}
+
 	if (node->leftChild != nullptr)
 	{
 		printTree(tree, node->leftChild);
@@ -58,6 +81,7 @@ void printTree(Tree* tree, Node* node)
 	if (node->rightChild != nullptr)
 	{
 		printTree(tree, node->rightChild);
+		printf(") ");
 	}
 }
 
@@ -65,6 +89,6 @@ int main()
 {
 	Tree* tree = readFromFile("file.txt");
 	printTree(tree, tree->root);
-
+	
 	return 0;
 }
