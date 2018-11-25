@@ -7,7 +7,7 @@ using namespace stack;
 int performingOperation(int number1, int number2, char operation)
 {
 	int result = 0;
-	switch(operation)
+	switch (operation)
 	{
 	case '+':
 		result = number1 + number2;
@@ -25,7 +25,7 @@ int performingOperation(int number1, int number2, char operation)
 	return result;
 }
 
-int calculation(std::string &str)
+int calculation(const std::string &str)
 {
 	Stack *stack = createStack();
 	int length = str.length();
