@@ -4,8 +4,13 @@
 #include <iostream>
 #include <fstream>
 
-Node* createNode(FILE *file);
-Tree* createTree(FILE *file);
+//Tree* createTree(FILE *file);
+//Node* createNode(FILE *file);
+
+struct Tree
+{
+	Node* root = nullptr;
+};
 
 struct Node
 {
@@ -14,46 +19,9 @@ struct Node
 	Node* rightChild = nullptr;
 };
 
-struct Tree
+bool isEmpty(Tree* tree)
 {
-	Node* root = nullptr;
-};
-
-void deleteTree(Tree* tree, Node* node)
-{
-	if (isEmpty(tree))
-	{
-		return;
-	}
-	else
-	{
-		if (node->leftChild != nullptr)
-		{
-			deleteTree(tree, node->leftChild);
-		}
-		if (node->rightChild != nullptr)
-		{
-			deleteTree(tree, node->rightChild);
-		}
-		delete node;
-	}
-}
-
-Tree* readFromFile(const char* fileName)
-{
-	FILE *file = fopen(fileName, "r");
-	if (!file)
-	{
-		std::cout << "File not found";
-	}
-	Tree* tree = createTree(file);
-	fclose(file);
-	return tree;
-}
-
-Tree* createTree(FILE *file)
-{
-	return new Tree{ createNode(file) };
+	return tree->root == nullptr;
 }
 
 Node* createNode(FILE *file)
@@ -74,6 +42,28 @@ Node* createNode(FILE *file)
 		newNode->data = symbol;
 	}
 	return newNode;
+}
+
+Tree* createTree(FILE *file)
+{
+	return new Tree{ createNode(file) };
+}
+
+Tree* readFromFile(const char* fileName)
+{
+	FILE *file = fopen(fileName, "r");
+	if (!file)
+	{
+		std::cout << "File not found";
+	}
+	Tree* tree = createTree(file);
+	fclose(file);
+	return tree;
+}
+
+bool isOperator(char symbol)
+{
+	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
 }
 
 void printTree(Tree* tree, Node* node)
@@ -146,12 +136,22 @@ int treeValue(Tree* tree)
 	return calculation(tree, tree->root);
 }
 
-bool isEmpty(Tree* tree)
+void deleteTree(Tree* tree, Node* node)
 {
-	return tree->root == nullptr;
-}
-
-bool isOperator(char symbol)
-{
-	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+	if (isEmpty(tree))
+	{
+		return;
+	}
+	else
+	{
+		if (node->leftChild != nullptr)
+		{
+			deleteTree(tree, node->leftChild);
+		}
+		if (node->rightChild != nullptr)
+		{
+			deleteTree(tree, node->rightChild);
+		}
+		delete node;
+	}
 }

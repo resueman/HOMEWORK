@@ -1,11 +1,6 @@
 #include "tree.h"
 #include <iostream>
 
-struct Tree
-{
-	Node* root = nullptr;
-};
-
 int main()
 {
 	Tree* tree = readFromFile("file.txt");
