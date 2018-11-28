@@ -1,22 +1,12 @@
 #pragma once
 
+struct Tree;
 struct Node;
 
-struct Tree
-{
-	Node* root = nullptr;
-};
-
-struct Node
-{
-	char data = 0;
-	Node* leftChild = nullptr;
-	Node* rightChild = nullptr;
-};
-///function that creates tree
-Tree* createTree();
-void addToTree(Tree* tree, const char data);
-void addNode(Node* node, const char data);
+Tree* readFromFile(const char* fileName);
+void printTree(Tree* tree, Node* node);
+int treeValue(Tree* tree);
+int calculation(Tree* tree, Node* node);
 bool isEmpty(Tree* tree);
-bool isOperator(const char symbol);
-
+bool isOperator(char symbol);
+void deleteTree(Tree* tree, Node* node);
