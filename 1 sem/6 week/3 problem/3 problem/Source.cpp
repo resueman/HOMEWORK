@@ -4,14 +4,25 @@
 
 using namespace stack;
 
-bool isOperand(char symbol)
+int prioritet(char operation)
 {
-	return symbol >= '0' && symbol <= '9';
+	switch (operation)
+	{
+	case '+':
+		return 2;
+	case '-':
+		return 2;
+	case '*':
+		return 1;
+	case '/':
+		return 1;
+	}
+	return 3;
 }
 
-bool isOperator(char symbol)
+bool topHasLowerPrec(Stack* stack, char operation)
 {
-	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+	return prioritet(top(stack)) <= prioritet(operation);
 }
 
 bool isOpeningParantheses(char symbol)
@@ -24,25 +35,34 @@ bool isClosingParantheses(char symbol)
 	return symbol == ')';
 }
 
-int prioritet(char operation)
+void doIfClosingParantheses(Stack* stack, std::string &postfixStr, bool &result)
 {
-	switch (operation)
+	while (!isEmpty(stack) && !isOpeningParantheses(top(stack)))
 	{
-		case '+':
-			return 2;
-		case '-':
-			return 2;
-		case '*':
-			return 1;
-		case '/':
-			return 1;
+		postfixStr += top(stack);
+		pop(stack, result);
 	}
-	return 3; 
+	pop(stack, result);
 }
 
-bool topHasLowerPrec(Stack* stack, char operation)
+bool isOperand(char symbol)
 {
-	return prioritet(top(stack)) <= prioritet(operation);
+	return symbol >= '0' && symbol <= '9';
+}
+
+bool isOperator(char symbol)
+{
+	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+}
+
+void doIfOperator(Stack* stack, std::string &postfixStr, char symbol, bool &result)
+{
+	while (!isEmpty(stack) && topHasLowerPrec(stack, symbol) && !isOpeningParantheses(symbol))
+	{
+		postfixStr += top(stack);
+		pop(stack, result);
+	}
+	push(stack, symbol);
 }
 
 void infixToPostfix(const std::string &infixStr, std::string &postfixStr)
@@ -56,33 +76,19 @@ void infixToPostfix(const std::string &infixStr, std::string &postfixStr)
 		{
 			postfixStr += infixStr[i];
 		}
-
-		if (isOpeningParantheses(infixStr[i]))
+		else if (isOpeningParantheses(infixStr[i]))
 		{
 			push(stack, infixStr[i]);
 		}
-		
-		if (isOperator(infixStr[i]))
+		else if (isOperator(infixStr[i]))
 		{
-			while (!isEmpty(stack) && topHasLowerPrec(stack, infixStr[i]) && !isOpeningParantheses(infixStr[i]))
-			{
-				postfixStr += top(stack);
-				pop(stack, result);
-			}
-			push(stack, infixStr[i]);
+			doIfOperator(stack, postfixStr, infixStr[i], result);
 		}
-
-		if (isClosingParantheses(infixStr[i]))
+		else if (isClosingParantheses(infixStr[i]))
 		{
-			while (!isEmpty(stack) && !isOpeningParantheses(top(stack)))
-			{
-				postfixStr += top(stack);
-				pop(stack, result);
-			}
-			pop(stack, result);
+			doIfClosingParantheses(stack, postfixStr, result);
 		}
 	}
-
 	while (!isEmpty(stack))
 	{
 		if (top(stack) == '(' || top(stack) == ')')
