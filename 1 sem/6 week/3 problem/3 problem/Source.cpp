@@ -1,7 +1,6 @@
-#include <iostream>
-#include <conio.h>
 #include "stack.h"
 #include "test.h"
+#include <iostream>
 
 using namespace stack;
 
@@ -38,7 +37,7 @@ int prioritet(char operation)
 		case '/':
 			return 1;
 	}
-	return 3; //for opening parantheses and numbers
+	return 3; 
 }
 
 bool topHasLowerPrec(Stack* stack, char operation)
@@ -46,11 +45,11 @@ bool topHasLowerPrec(Stack* stack, char operation)
 	return prioritet(top(stack)) <= prioritet(operation);
 }
 
-void infixToPostfix(std::string &infixStr, std::string &postfixStr)
+void infixToPostfix(const std::string &infixStr, std::string &postfixStr)
 {	
 	Stack *stack = createStack();
 	int length = infixStr.length();
-	bool correctness = true;
+	bool result = true;
 	for (int i = 0; i < length; ++i)
 	{
 		if (isOperand(infixStr[i]))
@@ -68,7 +67,7 @@ void infixToPostfix(std::string &infixStr, std::string &postfixStr)
 			while (!isEmpty(stack) && topHasLowerPrec(stack, infixStr[i]) && !isOpeningParantheses(infixStr[i]))
 			{
 				postfixStr += top(stack);
-				pop(stack);
+				pop(stack, result);
 			}
 			push(stack, infixStr[i]);
 		}
@@ -78,16 +77,9 @@ void infixToPostfix(std::string &infixStr, std::string &postfixStr)
 			while (!isEmpty(stack) && !isOpeningParantheses(top(stack)))
 			{
 				postfixStr += top(stack);
-				pop(stack);
+				pop(stack, result);
 			}
-			if (isEmpty(stack))
-			{
-				correctness = false;
-			}
-			else
-			{
-				pop(stack);
-			}
+			pop(stack, result);
 		}
 	}
 
@@ -95,19 +87,19 @@ void infixToPostfix(std::string &infixStr, std::string &postfixStr)
 	{
 		if (top(stack) == '(' || top(stack) == ')')
 		{
-			correctness = false;
-			pop(stack);
+			result = false;
+			break;
 		}
 		else 
 		{
-			postfixStr += top(stack);
-			pop(stack);
+			postfixStr += pop(stack, result);
 		}
 	}
-	if (!correctness)
+	if (!result)
 	{
 		postfixStr = "Error! Incorrect input...\n";
 	}
+	deleteStack(stack);
 }
 
 int main()
@@ -124,6 +116,5 @@ int main()
 	infixToPostfix(infixStr, postfixStr);
 	std::cout << postfixStr;
 
-	_getch();
 	return 0;
 }

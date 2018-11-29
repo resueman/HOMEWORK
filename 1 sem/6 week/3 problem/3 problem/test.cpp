@@ -2,43 +2,44 @@
 
 bool test()
 {
-	std::string infixStr1 = "7*(5+6)";
+	bool result = true;
+	const std::string infixStr1 = "7*(5+6)";
 	std::string postfixStr1 = "";
 	infixToPostfix(infixStr1, postfixStr1);
 
-	std::string infixStr2 = "(5+6)*7";
+	const std::string infixStr2 = "(5+6)*7";
 	std::string postfixStr2 = "";
 	infixToPostfix(infixStr2, postfixStr2);
 	
-	std::string infixStr3 = "5-(4-(3-(2-1)))";
+	const std::string infixStr3 = "5-(4-(3-(2-1)))";
 	std::string postfixStr3 = "";
 	infixToPostfix(infixStr3, postfixStr3);
 	
-	std::string infixStr4 = "5+6-7*8*9/2-2*7+8-6*3";
+	const std::string infixStr4 = "5+6-7*8*9/2-2*7+8-6*3";
 	std::string postfixStr4 = "";
 	infixToPostfix(infixStr4, postfixStr4);
 	
-	std::string infixStr5 = "(5-(3*(4-(6-7)-7)*5-(7-(6*5-3))))-1";
+	const std::string infixStr5 = "(5-(3*(4-(6-7)-7)*5-(7-(6*5-3))))-1";
 	std::string postfixStr5 = "";
 	infixToPostfix(infixStr5, postfixStr5);
 	
-	std::string infixStr6 = "3-1-2";
+	const std::string infixStr6 = "3-1-2";
 	std::string postfixStr6 = "";
 	infixToPostfix(infixStr6, postfixStr6);
 	
-	std::string infixStr7 = "(9-6)+(4-3";
+	const std::string infixStr7 = "(9-6)+(4-3";
 	std::string postfixStr7 = "";
 	infixToPostfix(infixStr7, postfixStr7);
 	
-	std::string infixStr8 = "9+7-(6+8";
+	const std::string infixStr8 = "9+7-(6+8";
 	std::string postfixStr8 = "";
 	infixToPostfix(infixStr8, postfixStr8);
 
-	std::string infixStr9 = "9+7-(8+6)-0)";
+	const std::string infixStr9 = "9+7-(8+6)-0)";
 	std::string postfixStr9 = "";
 	infixToPostfix(infixStr9, postfixStr9);
 	
-	std::string infixStr10 = "9+7)+3";
+	const std::string infixStr10 = "9+7)+3";
 	std::string postfixStr10 = "";
 	infixToPostfix(infixStr10, postfixStr10);
 	

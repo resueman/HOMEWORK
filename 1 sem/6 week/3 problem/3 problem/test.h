@@ -3,4 +3,4 @@
 #include <string>
 
 bool test();
-void infixToPostfix(std::string &infixStr, std::string &postfixStr);
+void infixToPostfix(const std::string &infixStr, std::string &postfixStr);
