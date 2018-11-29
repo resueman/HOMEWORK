@@ -1,6 +1,6 @@
 #include "interaction.h"
-#include "print.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -55,6 +55,10 @@ void case3(Set* set)
 	}
 }
 
+void printDescendingOrder(Set* set, std::string &resultStr);
+
+void printAscendingOrder(Set* set, std::string &resultStr);
+
 void interaction()
 {
 	printOptions();
@@ -100,4 +104,5 @@ void interaction()
 			break;
 		}
 	} while (userChoice != 0);
+	deleteSet(set);
 }

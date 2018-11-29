@@ -19,5 +19,3 @@ bool exists(Set* set, int const data);
 
 ///check if set is empty
 bool isEmpty(Set* set);
-
-

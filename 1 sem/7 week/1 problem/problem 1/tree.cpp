@@ -1,6 +1,7 @@
 #include "tree.h"
-#include <string>//////////
-#include <iostream>////////
+#include <string>
+#include <iostream>
+
 struct Node
 {
 	int data = 0;
@@ -196,7 +197,7 @@ bool isEmpty(Set* set)
 {
 	return set->root == nullptr;
 }
-/////////////////////////////////////////////////////////////////////
+
 void doPrintDescendingOrder(Node* node, std::string &resultStr)
 {
 	if (node->rightChild != nullptr)
@@ -242,4 +243,3 @@ void printAscendingOrder(Set* set, std::string &resultStr)
 	}
 	doPrintAscendingOrder(set->root, resultStr);
 }
-

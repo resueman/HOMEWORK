@@ -1,5 +1,4 @@
 #include "test.h"
-#include "print.h"
 
 using namespace std;
 
@@ -33,5 +32,6 @@ bool test()
 	readFromFile(set);
 	printAscendingOrder(set, result1);
 	printDescendingOrder(set, result2);
+	deleteSet(set);
 	return result1 == desiredResult1 && result2 == desiredResult2;
 }
