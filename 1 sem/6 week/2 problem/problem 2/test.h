@@ -3,4 +3,4 @@
 #include <string>
 
 bool test();
-bool checkBalance(std::string &str);
+bool checkBalance(const std::string &str, bool &result);

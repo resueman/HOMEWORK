@@ -1,11 +1,10 @@
-#include <string>
-#include <iostream>
 #include "stack.h"
 #include "test.h"
+#include <iostream>
 
 using namespace stack;
 
-bool checkBalance(std::string & str)
+bool checkBalance(const std::string & str, bool &result)
 {
 	Stack *stack = createStack();
 	int length = str.length();
@@ -17,27 +16,29 @@ bool checkBalance(std::string & str)
 		}
 		if (str[i] == ']')
 		{
-			if (pop(stack, isEmpty(stack)) != '[')
+			if (pop(stack, result) != '[')
 			{
 				return false;
 			}
 		}
 		if (str[i] == ')')
 		{
-			if (pop(stack, isEmpty(stack)) != '(')
+			if (pop(stack, result) != '(')
 			{
 				return false;
 			}
 		}
 		if (str[i] == '}')
 		{
-			if (pop(stack, isEmpty(stack)) != '{')
+			if (pop(stack, result) != '{')
 			{
 				return false;
 			}
 		}
 	}
-	return isEmpty(stack);
+	bool balance = isEmpty(stack);
+	deleteStack(stack);
+	return balance;
 }
 
 int main()
@@ -50,7 +51,8 @@ int main()
 	std::string str = "";
 	std::cout << "Enter string  ";
 	std::cin >> str;
-	if (checkBalance(str))
+	bool result = true;
+	if (checkBalance(str, result))
 	{
 		std::cout << "Balance";
 	}
@@ -58,5 +60,6 @@ int main()
 	{
 		std::cout << "No balance";
 	}
+	
 	return 0;
 }
