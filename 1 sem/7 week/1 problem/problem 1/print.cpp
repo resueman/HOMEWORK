@@ -1,38 +1,51 @@
-#include "print.h"
+/*#include "print.h"
+#include "tree.h"
 #include <iostream>
 
-void printDescendingOrder(Set* set, Node* node, std::string &resultStr)
+void doPrintDescendingOrder(Node* node, std::string &resultStr)
 {
-	if (isEmpty(set))
-	{
-		std::cout << "Set is empty";
-		return;
-	}
 	if (node->rightChild != nullptr)
 	{
-		printDescendingOrder(set, node->rightChild, resultStr);
+		doPrintDescendingOrder(node->rightChild, resultStr);
 	}
 	resultStr += std::to_string(node->data) + " ";
 	if (node->leftChild != nullptr)
 	{
-		printDescendingOrder(set, node->leftChild, resultStr);
+		doPrintDescendingOrder(node->leftChild, resultStr);
 	}
 }
 
-void printAscendingOrder(Set* set, Node* node, std::string &resultStr)
+void printDescendingOrder(Set* set, std::string &resultStr)
 {
 	if (isEmpty(set))
 	{
 		std::cout << "Set is empty";
 		return;
 	}
+	doPrintDescendingOrder(set->root, resultStr);
+}
+
+void doPrintAscendingOrder(Node* node, std::string &resultStr)
+{
 	if (node->leftChild != nullptr)
 	{
-		printAscendingOrder(set, node->leftChild, resultStr);
+		doPrintAscendingOrder(node->leftChild, resultStr);
 	}
 	resultStr += std::to_string(node->data) + " ";
 	if (node->rightChild != nullptr)
 	{
-		printAscendingOrder(set, node->rightChild, resultStr);
+		doPrintAscendingOrder(node->rightChild, resultStr);
 	}
 }
+
+void printAscendingOrder(Set* set, std::string &resultStr)
+{
+	if (isEmpty(set))
+	{
+		std::cout << "Set is empty";
+		return;
+	}
+	doPrintAscendingOrder(set->root, resultStr);
+}
+
+*/

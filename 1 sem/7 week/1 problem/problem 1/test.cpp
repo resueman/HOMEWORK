@@ -31,7 +31,7 @@ bool test()
 	
 	Set *set = createSet();
 	readFromFile(set);
-	printAscendingOrder(set, set->root, result1);
-	printDescendingOrder(set, set->root, result2);
+	printAscendingOrder(set, result1);
+	printDescendingOrder(set, result2);
 	return result1 == desiredResult1 && result2 == desiredResult2;
 }

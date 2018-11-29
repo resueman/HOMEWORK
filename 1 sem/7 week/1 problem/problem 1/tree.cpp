@@ -1,5 +1,6 @@
 #include "tree.h"
-
+#include <string>//////////
+#include <iostream>////////
 struct Node
 {
 	int data = 0;
@@ -17,44 +18,26 @@ Set* createSet()
 	return new Set;
 }
 
-void deleteSet(Set* set, Node* node)
+void doDeleteSet(Node* node)
+{
+	if (node->leftChild != nullptr)
+	{
+		doDeleteSet(node->leftChild);
+	}
+	if (node->rightChild != nullptr)
+	{
+		doDeleteSet(node->rightChild);
+	}
+	delete node;
+}
+
+void deleteSet(Set* set)
 {
 	if (isEmpty(set))
 	{
 		return;
 	}
-	else
-	{
-		if (node->leftChild != nullptr)
-		{
-			deleteSet(set, node->leftChild);
-		}
-		if (node->rightChild != nullptr)
-		{
-			deleteSet(set, node->rightChild);
-		}
-		delete node;
-	}
-}
-
-bool addToSet(Set* set, int const data)
-{
-	if (isEmpty(set))
-	{
-		set->root = new Node{ data, nullptr, nullptr };
-	}
-	else
-	{
-		if(!exists(set, data))
-		{
-			addNode(set->root, data);
-		}
-		else
-		{
-			return false;
-		}
-	}
-	return true;
+	doDeleteSet(set->root);
 }
 
 void addNode(Node* node, int const data)
@@ -81,6 +64,26 @@ void addNode(Node* node, int const data)
 			node->rightChild = new Node{ data, nullptr, nullptr };
 		}
 	}
+}
+
+bool addToSet(Set* set, int const data)
+{
+	if (isEmpty(set))
+	{
+		set->root = new Node{ data, nullptr, nullptr };
+	}
+	else
+	{
+		if (!exists(set, data))
+		{
+			addNode(set->root, data);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 bool exists(Set* set, int const data)
@@ -124,17 +127,15 @@ bool exists(Set* set, int const data)
 	}
 }
 
-bool removeFromSet(Set* set, int const data)
+int maximum(Node* current)
 {
-	if (!exists(set, data))
+	auto* temp = current;
+	temp = temp->leftChild;
+	while (temp->rightChild != nullptr)
 	{
-		return false;
+		temp = temp->rightChild;
 	}
-	else
-	{
-		removeNode(set->root, data);
-	}
-	return true;
+	return temp->data;
 }
 
 void removeNode(Node*& current, int const data)
@@ -178,18 +179,67 @@ void removeNode(Node*& current, int const data)
 	}
 }
 
-int maximum(Node* current)
+bool removeFromSet(Set* set, int const data)
 {
-	auto* temp = current;
-	temp = temp->leftChild;
-	while (temp->rightChild != nullptr)
+	if (!exists(set, data))
 	{
-		temp = temp->rightChild;
+		return false;
 	}
-	return temp->data;
+	else
+	{
+		removeNode(set->root, data);
+	}
+	return true;
 }
 
 bool isEmpty(Set* set)
 {
 	return set->root == nullptr;
 }
+/////////////////////////////////////////////////////////////////////
+void doPrintDescendingOrder(Node* node, std::string &resultStr)
+{
+	if (node->rightChild != nullptr)
+	{
+		doPrintDescendingOrder(node->rightChild, resultStr);
+	}
+	resultStr += std::to_string(node->data) + " ";
+	if (node->leftChild != nullptr)
+	{
+		doPrintDescendingOrder(node->leftChild, resultStr);
+	}
+}
+
+void printDescendingOrder(Set* set, std::string &resultStr)
+{
+	if (isEmpty(set))
+	{
+		std::cout << "Set is empty";
+		return;
+	}
+	doPrintDescendingOrder(set->root, resultStr);
+}
+
+void doPrintAscendingOrder(Node* node, std::string &resultStr)
+{
+	if (node->leftChild != nullptr)
+	{
+		doPrintAscendingOrder(node->leftChild, resultStr);
+	}
+	resultStr += std::to_string(node->data) + " ";
+	if (node->rightChild != nullptr)
+	{
+		doPrintAscendingOrder(node->rightChild, resultStr);
+	}
+}
+
+void printAscendingOrder(Set* set, std::string &resultStr)
+{
+	if (isEmpty(set))
+	{
+		std::cout << "Set is empty";
+		return;
+	}
+	doPrintAscendingOrder(set->root, resultStr);
+}
+

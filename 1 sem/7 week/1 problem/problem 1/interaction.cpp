@@ -80,14 +80,14 @@ void interaction()
 		case 4:
 		{
 			std::string str = "";
-			printAscendingOrder(set, set->root, str);
+			printAscendingOrder(set, str);
 			cout << str;
 		}
 		break;
 		case 5:
 		{
 			std::string str = "";
-			printDescendingOrder(set, set->root, str);
+			printDescendingOrder(set, str);
 			cout << str;
 		}
 		break;
