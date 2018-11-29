@@ -2,7 +2,6 @@
 
 bool test()
 {
-	bool result = true;
 	const std::string infixStr1 = "7*(5+6)";
 	std::string postfixStr1 = "";
 	infixToPostfix(infixStr1, postfixStr1);
