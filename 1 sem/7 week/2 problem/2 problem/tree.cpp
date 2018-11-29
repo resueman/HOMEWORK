@@ -2,10 +2,8 @@
 
 #include "tree.h"
 #include <iostream>
-#include <fstream>
 
-//Tree* createTree(FILE *file);
-//Node* createNode(FILE *file);
+struct Node;
 
 struct Tree
 {
@@ -66,13 +64,8 @@ bool isOperator(char symbol)
 	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
 }
 
-void printTree(Tree* tree, Node* node)
+void doPrintTree(Node* node)
 {
-	if (isEmpty(tree))
-	{
-		std::cout << "Tree is empty";
-		return;
-	}
 	if (isOperator(node->data))
 	{
 		switch (node->data)
@@ -97,30 +90,40 @@ void printTree(Tree* tree, Node* node)
 	}
 	if (node->leftChild != nullptr)
 	{
-		printTree(tree, node->leftChild);
+		doPrintTree(node->leftChild);
 	}
 	if (node->rightChild != nullptr)
 	{
-		printTree(tree, node->rightChild);
+		doPrintTree(node->rightChild);
 		std::cout << ") ";
 	}
 }
 
-int calculation(Tree* tree, Node* node)
+void printTree(Tree* tree)
+{
+	if (isEmpty(tree))
+	{
+		std::cout << "Tree is empty";
+		return;
+	}
+	doPrintTree(tree->root);
+}
+
+int calculation(Node* node)
 {
 	switch (node->data)
 	{
 	case '+':
-		return calculation(tree, node->leftChild) + calculation(tree, node->rightChild);
+		return calculation(node->leftChild) + calculation(node->rightChild);
 		break;
 	case '-':
-		return calculation(tree, node->leftChild) - calculation(tree, node->rightChild);
+		return calculation(node->leftChild) - calculation(node->rightChild);
 		break;
 	case '*':
-		return calculation(tree, node->leftChild) * calculation(tree, node->rightChild);
+		return calculation(node->leftChild) * calculation(node->rightChild);
 		break;
 	case '/':
-		return calculation(tree, node->leftChild) / calculation(tree, node->rightChild);
+		return calculation(node->leftChild) / calculation(node->rightChild);
 		break;
 	}
 	return node->data - '0';
@@ -133,25 +136,27 @@ int treeValue(Tree* tree)
 		std::cout << "Tree is empty";
 		return 0;
 	}
-	return calculation(tree, tree->root);
+	return calculation(tree->root);
 }
 
-void deleteTree(Tree* tree, Node* node)
+void doDeleteTree(Node* node)
+{
+	if (node->leftChild != nullptr)
+	{
+		doDeleteTree(node->leftChild);
+	}
+	if (node->rightChild != nullptr)
+	{
+		doDeleteTree(node->rightChild);
+	}
+	delete node;
+}
+
+void deleteTree(Tree* tree)
 {
 	if (isEmpty(tree))
 	{
 		return;
 	}
-	else
-	{
-		if (node->leftChild != nullptr)
-		{
-			deleteTree(tree, node->leftChild);
-		}
-		if (node->rightChild != nullptr)
-		{
-			deleteTree(tree, node->rightChild);
-		}
-		delete node;
-	}
+	doDeleteTree(tree->root);
 }

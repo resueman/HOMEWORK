@@ -1,10 +1,11 @@
 #pragma once
 
+#include <stdio.h>
+
 struct Tree;
-struct Node;
 
 Tree* createTree(FILE *file);
 Tree* readFromFile(const char* fileName);
-void printTree(Tree* tree, Node* node);
+void printTree(Tree* tree);
 int treeValue(Tree* tree);
-void deleteTree(Tree* tree, Node* node);
+void deleteTree(Tree* tree);

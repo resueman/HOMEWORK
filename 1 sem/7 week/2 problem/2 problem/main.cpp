@@ -4,10 +4,9 @@
 int main()
 {
 	Tree* tree = readFromFile("file.txt");
-	printTree(tree, tree->root);
+	printTree(tree);
 	std::cout << std::endl;
 	std::cout << treeValue(tree);
-	deleteTree(tree, tree->root);
-	
+	deleteTree(tree);
 	return 0;
 }
