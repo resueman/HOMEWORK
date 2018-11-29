@@ -25,7 +25,7 @@ int performingOperation(int number1, int number2, char operation)
 	return result;
 }
 
-int calculation(const std::string &str)
+int calculation(const std::string &str, bool &result)
 {
 	Stack *stack = createStack();
 	int length = str.length();
@@ -33,10 +33,10 @@ int calculation(const std::string &str)
 	{
 		if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
 		{
-			int number2 = pop(stack);
-			int number1 = pop(stack);
-			int result = performingOperation(number1, number2, str[i]);
-			push(stack, result);
+			int number2 = pop(stack, result);
+			int number1 = pop(stack, result);
+			int resultOfOperation = performingOperation(number1, number2, str[i]);
+			push(stack, resultOfOperation);
 		}
 		else
 		{
@@ -48,7 +48,9 @@ int calculation(const std::string &str)
 			}
 		}
 	}
-	return pop(stack);
+	const int resultOfCalculation = pop(stack, result);
+	deleteStack(stack);
+	return resultOfCalculation;
 }
 
 int main()
@@ -61,7 +63,14 @@ int main()
 	std::string str = "";
 	std::cout << "Enter string  ";
 	std::cin >> str;
-	int result = calculation(str);
-	std::cout << result;
+	bool result = true;
+	int resultOfCalculation = calculation(str, result);
+	if (!result) 
+	{
+		std::cout << "Incorrect input";
+		return -2;
+	}
+	std::cout << resultOfCalculation;
+
 	return 0;
 }

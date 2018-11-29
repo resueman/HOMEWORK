@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace stack
 {
 	struct Stack;
@@ -12,11 +11,11 @@ namespace stack
 	void push(Stack *stack, char data);
 
 	//This function pop element from stack and return it's value 
-	int pop(Stack *stack);
+	int pop(Stack *stack, bool &result);
 
 	//This function return true if stack is empty
 	bool isEmpty(Stack *stack);
 
 	//Delete stack
-	void deleteStack(Stack &stack);
+	void deleteStack(Stack* stack);
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
-int calculation(std::string &str);
+int calculation(const std::string &str, bool &result);
 bool test();

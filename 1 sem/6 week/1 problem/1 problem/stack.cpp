@@ -24,8 +24,13 @@ void stack::push(stack::Stack *stack, char data)
 	stack->head = newElement;
 }
 
-int stack::pop(stack::Stack *stack)
+int stack::pop(stack::Stack *stack, bool &result)
 {
+	if (isEmpty(stack))
+	{
+		result = false;
+		return -1;
+	}
 	StackElement *temp = stack->head;
 	stack->head = stack->head->next;
 	char value = temp->data;
@@ -38,12 +43,12 @@ bool stack::isEmpty(stack::Stack *stack)
 	return stack->head == nullptr;
 }
 
-void stack::deleteStack(stack::Stack &stack)
+void stack::deleteStack(stack::Stack *stack)
 {
-	while (stack.head != nullptr)
+	while (stack->head != nullptr)
 	{
-		StackElement *temp = stack.head;
-		stack.head = temp->next;
+		StackElement *temp = stack->head;
+		stack->head = temp->next;
 		delete temp;
 	}
 }
