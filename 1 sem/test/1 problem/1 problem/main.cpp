@@ -15,7 +15,7 @@ void fromQueueToString(Queue* queue, string &result)
 	}
 }
 
-void printResultInFile(const char* fileName, Queue* queueLessA, Queue* queueBetweenAB, Queue* queueBiggerB, string &result)
+void printResultToFile(const char* fileName, Queue* queueLessA, Queue* queueBetweenAB, Queue* queueBiggerB, string &result)
 {
 	FILE* fileG = fopen(fileName, "w");
 
@@ -63,7 +63,7 @@ bool getResult(int &a, int &b, const char* fileNameFrom, const char* fileNameTo,
 		putInQueue(a, b, number, queueLessA, queueBetweenAB, queueBiggerB);
 	}
 
-	printResultInFile(fileNameTo, queueLessA, queueBetweenAB, queueBiggerB, result);
+	printResultToFile(fileNameTo, queueLessA, queueBetweenAB, queueBiggerB, result);
 
 	deleteQueue(queueLessA);
 	deleteQueue(queueBetweenAB);
@@ -89,13 +89,15 @@ int main()
 		cout << ":(";
 		return -1;
 	}
-	string result = "";
+	
 	int a = 0;
 	int b = 0;
 	cout << "Enter a:   ";
 	cin >> a;
 	cout << "Enter b:   ";
 	cin >> b;
+	
+	string result = "";
 	if (getResult(a, b, "f.txt", "g.txt", result))
 	{
 		cout << "Mission comleted!";
