@@ -3,8 +3,6 @@
 
 struct Node;
 
-const std::string emptyString = "";
-
 struct Tree
 {
 	Node* root = nullptr;
@@ -29,33 +27,34 @@ Tree* createTree()
 	return new Tree;
 }
 
-Node* searchKey(Node* node, int desiredKey)//search node by key
+std::string doGetDataByKey(Node* node, int desiredKey)
 {
 	if (node == nullptr)
 	{
-		return nullptr;
+		return "";
 	}
 	else if (node->key > desiredKey)
 	{
-		return searchKey(node->left, desiredKey);
-	}
-	else if (node->key == desiredKey)
-	{
-		return node;
+		return doGetDataByKey(node->left, desiredKey);
 	}
 	else if (node->key < desiredKey)
 	{
-		return searchKey(node->right, desiredKey);
+		return doGetDataByKey(node->right, desiredKey);
 	}
+	else
+	{
+		return node->data;
+	}
+}
+
+std::string getDataByKey(Tree* tree, int key)
+{
+	return doGetDataByKey(tree->root, key);
 }
 
 bool exists(Tree* tree, int key)
 {
-	if (isEmpty(tree))
-	{
-		return false;
-	}
-	return searchKey(tree->root, key) != nullptr;
+	return getDataByKey(tree, key) != "";
 }
 
 int height(Node* node)
@@ -160,15 +159,6 @@ void addRecord(Tree* tree, int key, std::string data)
 	doAddRecord(tree->root, key, data);
 }
 
-const std::string getDataByKey(Tree* tree, int key)
-{
-	if (!exists(tree, key))
-	{
-		return emptyString;
-	}
-	return searchKey(tree->root, key)->data;
-}
-
 void doDeleteTree(Node* node)
 {
 	if (node->left != nullptr)
@@ -191,18 +181,19 @@ void deleteTree(Tree* tree)
 	delete tree;
 }
 
-/*void doDeleteRecord(Node* node)
+void doDeleteNode(Node* node, int key)
 {
-
+	
 }
 
-void deleteRecord(Tree* tree, int key)
+void deleteNodeByKey(Tree* tree, int key)
 {
-	if (exists(tree, key))
+	if (isEmpty(tree))
 	{
-		doDeleteRecord(searchKey(tree->root, key));
+		return;
 	}
-}*/
+	doDeleteNode(tree->root, key);
+}
 
 void build(Node* node, std::string &result)
 {
