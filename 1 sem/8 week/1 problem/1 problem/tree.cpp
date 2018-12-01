@@ -1,4 +1,5 @@
 #include "tree.h"
+#include <iostream>
 
 struct Node;
 
@@ -54,6 +55,117 @@ bool exists(Tree* tree, int key)
 	return searchKey(tree->root, key) != nullptr;
 }
 
+int height(Node* node)
+{
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	return node->height;
+}
+
+int balanceValue(Node* node)
+{
+	return height(node->left) - height(node->right);
+}
+
+int max(int a, int b)
+{
+	if (a > b)
+	{
+		return a;
+	}
+	return b;
+}
+
+int newHeight(Node* node)
+{
+	return max(height(node->left), height(node->right)) + 1;
+}
+
+Node* rightRotate(Node* node)
+{
+	Node* newHead = node->left;
+	node->left = newHead->right;
+	newHead->right = node;
+	newHeight(newHead);
+	newHeight(node);
+	return newHead;
+}
+
+Node* leftRotate(Node* node)
+{
+	Node* newHead = node->right;
+	node->right = newHead->left;
+	newHead->left = node;
+	newHeight(newHead);
+	newHeight(node);
+	return newHead;
+}
+
+Node* balance(Node* node)
+{
+	newHeight(node);
+	if (balanceValue(node) == 2)
+	{
+		if (balanceValue(node->right) < 0)
+		{
+			node->right = rightRotate(node->right);
+		}
+		return leftRotate(node);
+	}
+	if (balanceValue(node) == -2)
+	{
+		if (balanceValue(node->left) > 0) 
+		{
+			node->left = leftRotate(node->left);
+		}	
+		return rightRotate(node);
+	}
+	return node;
+}
+
+Node* doAddRecord(Node* node, int newKey, std::string data)
+{
+	if (node == nullptr)
+	{
+		return node = new Node{ newKey, data };
+	}
+	else if (newKey > node->key)
+	{
+		node->right = doAddRecord(node->right, newKey, data);
+	}
+	else if ( newKey < node->key)
+	{
+		node->left = doAddRecord(node->left, newKey, data);
+	}
+	else if (newKey == node->key)
+	{
+		node->data = data;
+		return node;
+	}
+	return balance(node);
+}
+
+void addRecord(Tree* tree, int key, std::string data)
+{
+	if (isEmpty(tree))
+	{
+		tree->root = new Node{ key, data };
+		return;
+	}
+	doAddRecord(tree->root, key, data);
+}
+
+const std::string* getDataByKey(Tree* tree, int key)
+{
+	if (!exists(tree, key))
+	{
+		return &emptyString;
+	}
+	return &searchKey(tree->root, key)->data;
+}
+
 void doDeleteTree(Node* node)
 {
 	if (node->left != nullptr)
@@ -84,54 +196,29 @@ void deleteTree(Tree* tree)
 void deleteRecord(Tree* tree, int key)
 {
 	if (exists(tree, key))
-	{   
+	{
 		doDeleteRecord(searchKey(tree->root, key));
 	}
 }*/
 
-void balance(Tree* tree)
+void doPrint(Node* node)
 {
-
-
-}
-
-void doAddRecord(Node* node, int newKey, std::string data)
-{
-	if (node == nullptr)
+	if (node->left != nullptr)
 	{
-		node = new Node{ newKey, data };
+		doPrint(node->left);
 	}
-	else if (newKey > node->key)
+	std::cout << (node->data) + " ";
+	if (node->right != nullptr)
 	{
-		doAddRecord(node->right, newKey, data);
-	}
-	else if ( newKey < node->key)
-	{
-		doAddRecord(node->left, newKey, data);
+		doPrint(node->right);
 	}
 }
 
-void addRecord(Tree* tree, int key, std::string data)
+void print(Tree* tree)
 {
 	if (isEmpty(tree))
 	{
-		tree->root = new Node{ key, data };
 		return;
 	}
-	if (exists(tree, key))
-	{
-		searchKey(tree->root, key)->data = data;//excess tree traversal, include it in doAddRecord?
-		return;
-	}
-	doAddRecord(tree->root, key, data);
-	balance(tree);
-}
-
-const std::string* getDataByKey(Tree* tree, int key)
-{
-	if (!exists(tree, key))
-	{
-		return &emptyString;
-	}
-	return &searchKey(tree->root, key)->data;
+	doPrint(tree->root);
 }

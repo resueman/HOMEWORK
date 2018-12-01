@@ -20,7 +20,8 @@ bool exists(Tree* tree, int key);
 void addRecord(Tree* tree, int key, std::string data);
 
 ///delete record by key
-void deleteRecord(Tree* tree, int key);
+//void deleteRecord(Tree* tree, int key);
 
 ///
 const std::string* getDataByKey(Tree* tree, int key);
+void print(Tree* tree);
