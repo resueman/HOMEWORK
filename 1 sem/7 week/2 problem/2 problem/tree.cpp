@@ -52,7 +52,9 @@ Tree* readFromFile(const char* fileName)
 	FILE *file = fopen(fileName, "r");
 	if (!file)
 	{
-		std::cout << "File not found";
+		std::cout << "File not found\n";
+		Tree* tree = new Tree{ nullptr };
+		return tree;
 	}
 	Tree* tree = createTree(file);
 	fclose(file);
@@ -103,10 +105,11 @@ void printTree(Tree* tree)
 {
 	if (isEmpty(tree))
 	{
-		std::cout << "Tree is empty";
+		std::cout << "Tree is empty\n";
 		return;
 	}
 	doPrintTree(tree->root);
+	std::cout << std::endl;
 }
 
 int calculation(Node* node)
@@ -133,7 +136,7 @@ int treeValue(Tree* tree)
 {
 	if (isEmpty(tree))
 	{
-		std::cout << "Tree is empty";
+		std::cout << "Tree is empty\n";
 		return 0;
 	}
 	return calculation(tree->root);
@@ -159,4 +162,5 @@ void deleteTree(Tree* tree)
 		return;
 	}
 	doDeleteTree(tree->root);
+	delete tree;
 }
