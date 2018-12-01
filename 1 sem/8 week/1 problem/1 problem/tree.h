@@ -23,5 +23,5 @@ void addRecord(Tree* tree, int key, std::string data);
 //void deleteRecord(Tree* tree, int key);
 
 ///
-const std::string* getDataByKey(Tree* tree, int key);
-void print(Tree* tree);
+const std::string getDataByKey(Tree* tree, int key);
+void resultOfTreeBuilding(Tree* tree, std::string &result);

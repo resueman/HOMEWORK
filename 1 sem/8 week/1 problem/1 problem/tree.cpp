@@ -31,19 +31,22 @@ Tree* createTree()
 
 Node* searchKey(Node* node, int desiredKey)//search node by key
 {
-	if (node->key < desiredKey)
+	if (node == nullptr)
 	{
-		searchKey(node->right, desiredKey);
+		return nullptr;
 	}
 	else if (node->key > desiredKey)
 	{
-		searchKey(node->left, desiredKey);
+		return searchKey(node->left, desiredKey);
 	}
 	else if (node->key == desiredKey)
 	{
 		return node;
 	}
-	return nullptr;
+	else if (node->key < desiredKey)
+	{
+		return searchKey(node->right, desiredKey);
+	}
 }
 
 bool exists(Tree* tree, int key)
@@ -157,13 +160,13 @@ void addRecord(Tree* tree, int key, std::string data)
 	doAddRecord(tree->root, key, data);
 }
 
-const std::string* getDataByKey(Tree* tree, int key)
+const std::string getDataByKey(Tree* tree, int key)
 {
 	if (!exists(tree, key))
 	{
-		return &emptyString;
+		return emptyString;
 	}
-	return &searchKey(tree->root, key)->data;
+	return searchKey(tree->root, key)->data;
 }
 
 void doDeleteTree(Node* node)
@@ -201,24 +204,24 @@ void deleteRecord(Tree* tree, int key)
 	}
 }*/
 
-void doPrint(Node* node)
+void build(Node* node, std::string &result)
 {
 	if (node->left != nullptr)
 	{
-		doPrint(node->left);
+		build(node->left, result);
 	}
-	std::cout << (node->data) + " ";
+	result += node->data;
 	if (node->right != nullptr)
 	{
-		doPrint(node->right);
+		build(node->right, result);
 	}
 }
 
-void print(Tree* tree)
+void resultOfTreeBuilding(Tree* tree, std::string &result)
 {
 	if (isEmpty(tree))
 	{
 		return;
 	}
-	doPrint(tree->root);
+	build(tree->root, result);
 }
