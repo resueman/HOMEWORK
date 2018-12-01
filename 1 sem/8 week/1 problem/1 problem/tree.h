@@ -4,20 +4,23 @@
 
 struct Tree;
 
-///
+///if tree is empty function returns true, else returns false
 bool isEmpty(Tree* tree);
 
-///
+///create tree
 Tree* createTree();
 
-///
+///delete tree
+void deleteTree(Tree* tree);
+
+///check existence of record by key
+bool exists(Tree* tree, int key);
+
+///add record by key
+void addRecord(Tree* tree, int key, std::string data);
+
+///delete record by key
 void deleteRecord(Tree* tree, int key);
 
 ///
-void addRecord(Tree* tree, int key, std::string data);
-
-///
-std::string* getDataByKey(Tree* tree, int key);
-
-///
-void deleteTree(Tree* tree);
+const std::string* getDataByKey(Tree* tree, int key);
