@@ -23,9 +23,10 @@ std::string getDataByKey(Tree* tree, int key);
 void addRecord(Tree* tree, int key, std::string data);
 
 ///delete record by key
-void deleteNodeByKey(Tree* tree, int key);
+void deleteNode(Tree* tree, int key);
 
-///record result(keys) of tree traversal to string
-void resultOfTreeBuilding(Tree* tree, std::string &result);
+///reuturn key, which belongs to right child 
+int getRightChild(Tree* tree, int key);
 
-int get(Tree* tree, int desiredKey)
+///reuturn key, which belongs to left child 
+int getLeftChild(Tree* tree, int key);
