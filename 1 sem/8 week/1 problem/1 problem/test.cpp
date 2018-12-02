@@ -2,6 +2,37 @@
 #include "test.h"
 #include <iostream>
 
+int GetLeftChild(Node* node)
+{
+	return node->left->data;
+}
+
+int GetRightChild(Node* node)
+{
+	return node->right->data;
+}
+
+Node* getOwner(Tree* tree, int desiredKey)
+{
+	if (node->key > desiredKey)
+	{
+		return getLeftChild(node->left, desiredKey);
+	}
+	else if (node->key < desiredKey)
+	{
+		return getLeftChild(node->right, desiredKey);
+	}
+	else
+	{
+		return node;
+	}
+}
+
+int get(Tree* tree, int desiredKey)
+{
+	getOwner(tree->root, desiredKey);
+}
+
 bool test()
 {
 	//TEST 1
@@ -17,10 +48,14 @@ bool test()
 	addRecord(tree, 45, "g");
 	addRecord(tree, 2, "bbb");
 	addRecord(tree, 47, "h");
+	addRecord(tree, 60, "j");
+	addRecord(tree, 46, "h");
 	std::string result1 = "";
-	resultOfTreeBuilding(tree, result1);
+	
+	//bool result1 = getRightChild(getOwner(tree, 7)) == 9 && getLeftChild(getOwner(tree, 47)) == 45 && tree->root->key == 21
+		//&& getRightChild(getOwner(tree, 21)) == 47 && getLeftChild(getOwner(tree, 21)) == 7;
 
-	if (result1 != "abbbcdefghi")
+	if (!result1)
 	{
 		deleteTree(tree);
 		return false;
@@ -56,11 +91,9 @@ bool test()
 	deleteRecord(tree, 40);
 	deleteRecord(tree, 21);
 	deleteRecord(tree, 5);
-
-	std::string result3 = "";
-	resultOfTreeBuilding(tree, result3);
-
-	if (result3 != "bbbdeh")
+	
+	bool result3 =  
+	if (!result3)
 	{
 		deleteTree(tree);
 		return false;

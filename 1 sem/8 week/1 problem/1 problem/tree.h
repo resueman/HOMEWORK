@@ -27,3 +27,5 @@ void deleteNodeByKey(Tree* tree, int key);
 
 ///record result(keys) of tree traversal to string
 void resultOfTreeBuilding(Tree* tree, std::string &result);
+
+int get(Tree* tree, int desiredKey)

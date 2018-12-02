@@ -12,7 +12,7 @@ struct Node
 {
 	int key = 0;
 	std::string data = "";
-	int height = 0;
+	int height = 1;
 	Node* left = nullptr;
 	Node* right = nullptr;
 };
@@ -57,20 +57,6 @@ bool exists(Tree* tree, int key)
 	return getDataByKey(tree, key) != "";
 }
 
-int height(Node* node)
-{
-	if (node == nullptr)
-	{
-		return 0;
-	}
-	return node->height;
-}
-
-int balanceValue(Node* node)
-{
-	return height(node->left) - height(node->right);
-}
-
 int max(int a, int b)
 {
 	if (a > b)
@@ -80,54 +66,76 @@ int max(int a, int b)
 	return b;
 }
 
-int newHeight(Node* node)
+int height(Node* node)
 {
-	return max(height(node->left), height(node->right)) + 1;
+	if (node == nullptr)
+	{
+		return 0;
+	}
+	return node->height;
 }
 
-Node* rightRotate(Node* node)
+void newHeight(Node* node)
 {
+	node->height = max(height(node->left), height(node->right)) + 1;
+}
+
+int balanceValue(Node* node)
+{
+	return height(node->right) - height(node->left);
+}
+
+Node* rightRotate(Node* node, Tree* tree)
+{
+	if (tree->root == node)
+	{
+		tree->root = node->left;
+	}
 	Node* newHead = node->left;
 	node->left = newHead->right;
 	newHead->right = node;
-	newHeight(newHead);
 	newHeight(node);
+	newHeight(newHead);
 	return newHead;
 }
 
-Node* leftRotate(Node* node)
+Node* leftRotate(Node* node, Tree* tree)
 {
+	if (tree->root == node)
+	{
+		tree->root = node->right;
+	}
 	Node* newHead = node->right;
 	node->right = newHead->left;
 	newHead->left = node;
-	newHeight(newHead);
 	newHeight(node);
+	newHeight(newHead);
 	return newHead;
 }
 
-Node* balance(Node* node)
+Node* balance(Node* node, Tree* tree)
 {
 	newHeight(node);
 	if (balanceValue(node) == 2)
 	{
 		if (balanceValue(node->right) < 0)
 		{
-			node->right = rightRotate(node->right);
+			node->right = rightRotate(node->right, tree);
 		}
-		return leftRotate(node);
+		return leftRotate(node, tree);
 	}
 	if (balanceValue(node) == -2)
 	{
 		if (balanceValue(node->left) > 0) 
 		{
-			node->left = leftRotate(node->left);
+			node->left = leftRotate(node->left, tree);
 		}	
-		return rightRotate(node);
+		return rightRotate(node, tree);
 	}
 	return node;
 }
 
-Node* doAddRecord(Node* node, int newKey, std::string data)
+Node* doAddRecord(Node* node, int newKey, std::string data, Tree* tree)
 {
 	if (node == nullptr)
 	{
@@ -135,18 +143,18 @@ Node* doAddRecord(Node* node, int newKey, std::string data)
 	}
 	else if (newKey > node->key)
 	{
-		node->right = doAddRecord(node->right, newKey, data);
+		node->right = doAddRecord(node->right, newKey, data, tree);
 	}
 	else if ( newKey < node->key)
 	{
-		node->left = doAddRecord(node->left, newKey, data);
+		node->left = doAddRecord(node->left, newKey, data, tree);
 	}
-	else if (newKey == node->key)
+	else
 	{
 		node->data = data;
 		return node;
 	}
-	return balance(node);
+	return balance(node, tree);
 }
 
 void addRecord(Tree* tree, int key, std::string data)
@@ -156,7 +164,7 @@ void addRecord(Tree* tree, int key, std::string data)
 		tree->root = new Node{ key, data };
 		return;
 	}
-	doAddRecord(tree->root, key, data);
+	doAddRecord(tree->root, key, data, tree);
 }
 
 void doDeleteTree(Node* node)
