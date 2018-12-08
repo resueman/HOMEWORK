@@ -1,10 +1,11 @@
 #include "list.h"
 #include "hashTable.h"
-//#include <test.h>
+#include "test.h"
 #include <fstream>
+#include <locale>
 #include <istream>
 #include <iostream>
-
+#include <conio.h>
 using namespace std;
 
 bool readFromFile(Set* hashTable, const char* fileName)
@@ -36,7 +37,10 @@ int main()
 	}
 	std::cout << "Tests passed successfully!";
 	*/
+	setlocale(LC_ALL, "Russian");
 	Set* hashTable = createHashTable();
 	readFromFile(hashTable, "file.txt");
+	printHashTable(hashTable);
+	_getch();
 	return 0;
 }

@@ -24,12 +24,18 @@
     <ClCompile Include="hashTable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="hashTable.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

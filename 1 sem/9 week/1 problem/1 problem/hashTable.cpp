@@ -13,7 +13,7 @@ struct Set
 
 void constructor(Set *hashTable)
 {
-	int size = 100;
+	int size = 10;
 	hashTable->buckets.resize(size);
 }
 
@@ -44,4 +44,12 @@ void addToHashTable(Set* hashTable, string &str)
 int loadFactor(Set* hashTable)
 {
 	return hashTable->numberOfElements / hashTable->buckets.size();
+}
+
+void printHashTable(Set* hashTable)
+{
+	for (int i = 0; i < hashTable->buckets.size(); ++i)
+	{
+		printList(hashTable->buckets[i]);
+	}
 }

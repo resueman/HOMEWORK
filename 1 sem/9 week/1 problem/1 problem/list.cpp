@@ -44,8 +44,12 @@ void push(List* list, const std::string &str)
 	list->head = newElement;
 }
 
-void addToList(List* list, std::string &str)
+void addToList(List *&list, std::string &str)
 {
+	if (list == nullptr)
+	{
+		list = createList();
+	}
 	if (isEmpty(list))
 	{
 		push(list, str);
@@ -71,12 +75,23 @@ bool isEmpty(List* list)
 	return list->head == nullptr;
 }
 
-int maxListLenght(List* list)
-{
-
-}
-
+/*
 int averageListLength(List* list)
 {
 
+}*/
+
+void printList(List* list)
+{
+	if (list == nullptr)
+	{
+		return;
+	}
+	auto current = list->head;
+	while (current != nullptr)
+	{
+		std::cout << current->word << " " << current->counterOfReiterations << std::endl;
+		current = current->next;
+	}
+	std::cout << std::endl;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 struct List;
 
@@ -20,6 +21,8 @@ void push(List* list, const std::string &str);
 bool isEmpty(List* list);
 
 ///Returns average list lenght
-int averageListLength(List* list);
+//int averageListLength(List* list);
 
-void addToList(List* list, std::string &str);
+void addToList(List *&list, std::string &str);
+
+void printList(List* list);
