@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 
 struct List;
 
@@ -11,18 +10,17 @@ List* createList();
 ///This function removes list
 void deleteList(List* list);
 
-///Add element to list
-void pop(List* list, const std::string &str);
-
-///Removes element from list
-void push(List* list, const std::string &str);
-
-///if list is empty returns true, else returns false
+///If list is empty returns true, else returns false
 bool isEmpty(List* list);
 
-///Returns average list lenght
-//int averageListLength(List* list);
+///Remove element from list
+void push(List* list, const std::string &str);
 
-void addToList(List *&list, std::string &str);
+///Add word to list
+void addToList(List *&list, const std::string &str, int &countNumberOfBuckets);
 
+///Print list of current bucket
 void printList(List* list);
+
+///Return list lenght of current bucket
+int getListLenght(List* list);

@@ -118,11 +118,13 @@
     <ClCompile Include="hashTable.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="readFromFile.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hashTable.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="readFromFile.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>

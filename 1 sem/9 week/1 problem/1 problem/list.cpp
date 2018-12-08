@@ -1,10 +1,12 @@
 #include "list.h"
+#include <iostream>
 
 struct ListElement;
 
 struct List
 {
 	ListElement* head = nullptr;
+	int lenght = 0;
 };
 
 struct ListElement
@@ -21,21 +23,22 @@ List* createList()
 
 void deleteList(List* list)
 {
+	if (list == nullptr)
+	{
+		return;
+	}
 	while (!isEmpty(list))
 	{
 		auto temp = list->head;
 		list->head = temp->next;
 		delete temp;
 	}
-	list = nullptr;
 	delete list;
 }
 
-void pop(List* list, const std::string &str)
+bool isEmpty(List* list)
 {
-	ListElement* temp = list->head;
-	list->head = list->head->next;
-	delete temp;
+	return list->head == nullptr;
 }
 
 void push(List* list, const std::string &str)
@@ -44,42 +47,28 @@ void push(List* list, const std::string &str)
 	list->head = newElement;
 }
 
-void addToList(List *&list, std::string &str)
+void addToList(List *&list, const std::string &str, int &countNumberOfLists)
 {
 	if (list == nullptr)
 	{
 		list = createList();
-	}
-	if (isEmpty(list))
-	{
-		push(list, str);
-		return;
+		countNumberOfLists++;
 	}
 	auto current = list->head;
 	while (current != nullptr && current->word != str)
 	{
 		current = current->next;
 	}
-	if (current == nullptr)
-	{
-		push(list, str);
-	}
-	else
+	if (current != nullptr)
 	{
 		++current->counterOfReiterations;
 	}
+	else
+	{
+		push(list, str);
+		++list->lenght;
+	}
 }
-
-bool isEmpty(List* list)
-{
-	return list->head == nullptr;
-}
-
-/*
-int averageListLength(List* list)
-{
-
-}*/
 
 void printList(List* list)
 {
@@ -94,4 +83,9 @@ void printList(List* list)
 		current = current->next;
 	}
 	std::cout << std::endl;
+}
+
+int getListLenght(List* list)
+{
+	return list->lenght;
 }
