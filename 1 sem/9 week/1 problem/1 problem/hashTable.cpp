@@ -10,7 +10,7 @@ struct Set
 
 void constructor(Set *hashTable)
 {
-	int size = 20;
+	int size = 17;
 	hashTable->buckets.resize(size);
 }
 
@@ -34,12 +34,10 @@ int hashFunction(const std::string &str)
 {
 	int hash = 0;
 	int randomNumber1 = 11;
-	int randomNumber2 = 27;
-	int randomNumber3 = 35;
 	for (int i = 0; i < str.size(); ++i)
 	{
-		hash += hash * randomNumber1 * randomNumber2 * randomNumber3 + str[i];
-		randomNumber1 += randomNumber1 * randomNumber2;
+		hash += hash * randomNumber1 + str[i];
+		randomNumber1 += randomNumber1;
 	}
 	return hash;
 }
@@ -91,4 +89,15 @@ int maxListLength(Set* hashTable)
 		}
 	}
 	return maxListLenght;
+}
+
+int findNumberOfStrReiterations(Set *hashTable, std::string str)
+{
+	int hash = hashFunction(str) % hashTable->buckets.size();
+	auto element = findElement(hashTable->buckets[hash], str);
+	if (element == nullptr)
+	{
+		return -1;
+	}
+	return getCounterOfReiterations(element);
 }

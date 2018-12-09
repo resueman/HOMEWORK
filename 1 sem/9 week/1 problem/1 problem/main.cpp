@@ -1,19 +1,17 @@
 #include "list.h"
-#include "readFromFile.h"
 #include "test.h"
 #include <locale>
 #include <iostream>
 
 int main()
 {
+	setlocale(LC_ALL, "Russian");
 	if (!test())
 	{
 		std::cout << "Everything is bad ;(";
 		return -1;
 	}
 	std::cout << "Tests passed successfully!";
-	
-	setlocale(LC_ALL, "Russian");
 	Set* hashTable = createHashTable();
 	readFromFile(hashTable, "file.txt");
 

@@ -54,11 +54,7 @@ void addToList(List *&list, const std::string &str, int &countNumberOfLists)
 		list = createList();
 		countNumberOfLists++;
 	}
-	auto current = list->head;
-	while (current != nullptr && current->word != str)
-	{
-		current = current->next;
-	}
+	auto current = findElement(list, str);
 	if (current != nullptr)
 	{
 		++current->counterOfReiterations;
@@ -88,4 +84,24 @@ void printList(List* list)
 int getListLenght(List* list)
 {
 	return list->lenght;
+}
+
+int getNumberOfIterations(ListElement* element)
+{
+	return element->counterOfReiterations;
+}
+
+ListElement* findElement(List* list, std::string str)
+{
+	auto current = list->head;
+	while (current != nullptr && current->word != str)
+	{
+		current = current->next;
+	}
+	return current;
+}
+
+int getCounterOfReiterations(ListElement* element)
+{
+	return element->counterOfReiterations;
 }

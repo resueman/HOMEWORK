@@ -23,3 +23,6 @@ int averageListLength(Set* hashTable);
 
 ///Returns maximum list lenght of hash-table
 int maxListLength(Set* hashTable);
+
+///returns the number of reiterations of a word (by string)
+int findNumberOfStrReiterations(Set *hashTable, std::string str);
