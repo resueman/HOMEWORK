@@ -39,6 +39,8 @@ void deleteSet(Set* set)
 		return;
 	}
 	doDeleteSet(set->root);
+	delete set;
+	set = nullptr;
 }
 
 void addNode(Node* node, int const data)
