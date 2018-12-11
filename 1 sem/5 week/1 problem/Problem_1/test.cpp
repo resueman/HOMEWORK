@@ -4,7 +4,7 @@
 
 bool test()
 {
-	List listTest;
+	List* listTest = createList();
 	whatToDelete(listTest, 1);
 	addElement(listTest, 1);
 	whatToDelete(listTest, 1);
@@ -25,11 +25,11 @@ bool test()
 	system("cls");
 	std::string desiredResult = "0 7 ";
 	std::string resultWeGot = "";
-	auto* current = listTest.head;
+	auto current = getHead(listTest);
 	while (current != nullptr)
 	{
-		resultWeGot += std::to_string(current->data) + " ";
-		current = current->next;
+		resultWeGot += std::to_string(getData(current)) + " ";
+		current = getNext(current);
 	}
 	deleteList(listTest);
 	return resultWeGot == desiredResult;

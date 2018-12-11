@@ -1,9 +1,57 @@
 #include <iostream>
 #include "listFunctions.h"
 
-Element *previousLessElement(List &list, Element* current)
+struct Element
 {
-	Element* previous = list.head;
+	int data = 0;
+	Element* next = nullptr;
+};
+
+struct List
+{
+	Element* head = nullptr;
+};
+
+List* createList()
+{
+	return new List;
+}
+
+void deleteList(List* list)
+{
+	while (!isEmpty(list))
+	{
+		auto temp = list->head;
+		list->head = list->head->next;
+		delete temp;
+	}
+	delete list;
+	list = nullptr;
+}
+
+bool isEmpty(List* list)
+{
+	return list->head == nullptr;
+}
+
+Element* getHead(List* list)
+{
+	return list->head;
+}
+
+Element* getNext(Element* element)
+{
+	return element->next;
+}
+
+int getData(Element* element)
+{
+	return element->data;
+}
+
+Element *previousLessElement(List* list, Element* current)
+{
+	Element* previous = list->head;
 	while (previous->next != nullptr && previous->next->data < current->data)
 	{
 		previous = previous->next;
@@ -11,19 +59,29 @@ Element *previousLessElement(List &list, Element* current)
 	return previous;
 }
 
-void addElement(List &list, int value)
+Element* previousElement(List* list, Element* current)
+{
+	Element* previous = list->head;
+	while (previous->next != current)
+	{
+		previous = previous->next;
+	}
+	return previous;
+}
+
+void addElement(List* list, int value)
 {
 	auto elemToAdd = new Element{ value, nullptr };
 	if (isEmpty(list))
 	{
-		list.head = elemToAdd;
+		list->head = elemToAdd;
 	}
 	else
 	{
-		if (value < list.head->data)
+		if (value < list->head->data)
 		{
-			elemToAdd->next = list.head;
-			list.head = elemToAdd;
+			elemToAdd->next = list->head;
+			list->head = elemToAdd;
 		}
 		else
 		{
@@ -33,46 +91,36 @@ void addElement(List &list, int value)
 	}
 }
 
-Element* previousElement(List& list, Element* current)
+void deleteHead(List* list)
 {
-	Element* previous = list.head;
-	while (previous->next != current)
+	if (list->head->next == nullptr)
 	{
-		previous = previous->next;
-	}
-	return previous;
-}
-
-void deleteHead(List &list)
-{
-	if (list.head->next == nullptr)
-	{
-		delete list.head;
-		list.head = nullptr;
+		delete list->head;
+		list->head = nullptr;
 	}
 	else
 	{
-		Element* temp = list.head;
-		list.head = list.head->next;
+		Element* temp = list->head;
+		list->head = list->head->next;
 		delete temp;
 	}
 }
 
-void deleteTail(List &list, Element *elementToDelete)
+void deleteTail(List* list, Element* elementToDelete)
 {
 	previousElement(list, elementToDelete)->next = nullptr;
 	delete elementToDelete;
 }
 
-void deleteMiddle(List &list, Element *elementToDelete)
+void deleteMiddle(List* list, Element* elementToDelete)
 {
 	previousElement(list, elementToDelete)->next = elementToDelete->next;
 	delete elementToDelete;
 }
 
-void whatToDelete(List &list, int valueToDelete)
+void whatToDelete(List* list, int valueToDelete)
 {
-	auto *elementToDelete = list.head;
+	auto elementToDelete = list->head;
 	while ((elementToDelete != nullptr) && (elementToDelete->data != valueToDelete))
 	{
 		elementToDelete = elementToDelete->next;
@@ -83,7 +131,7 @@ void whatToDelete(List &list, int valueToDelete)
 	}
 	else
 	{
-		if (elementToDelete == list.head)
+		if (elementToDelete == list->head)
 		{
 			deleteHead(list);
 		}
@@ -98,31 +146,16 @@ void whatToDelete(List &list, int valueToDelete)
 	}
 }
 
-bool isEmpty(List &list)
-{
-	return list.head == nullptr;
-}
-
-void printList(List &list)
+void printList(List* list)
 {
 	if (isEmpty(list))
 	{
 		std::cout << "No elements in list\n";
 	}
-	auto* current = list.head;
+	auto current = list->head;
 	while (current != nullptr)
 	{
 		std::cout << current->data << " ";
 		current = current->next;
-	}
-}
-
-void deleteList(List &list)
-{
-	while (!isEmpty(list))
-	{
-		auto temp = list.head;
-		list.head = list.head->next;
-		delete temp;
 	}
 }
