@@ -79,8 +79,9 @@ bool test()
 		return false;
 	}
 	std::cout << "Test 4 passed\n";
-
 	std::cout << "Tests are passed successfully!";
+
 	deleteTree(tree);
+	
 	return true;
 }

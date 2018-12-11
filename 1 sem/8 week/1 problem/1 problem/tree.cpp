@@ -28,7 +28,6 @@ Tree* createTree()
 }
 
 ///////// G E T   D A T A   B Y   K E Y /////////
-
 std::string doGetDataByKey(Node* node, int desiredKey)
 {
 	if (node == nullptr)
@@ -55,14 +54,12 @@ std::string getDataByKey(Tree* tree, int key)
 }
 
 ///////// E X I S T E N C E /////////
-
 bool exists(Tree* tree, int key)
 {
 	return getDataByKey(tree, key) != "";
 }
 
 ///////// B A L A N C E /////////
-
 int max(int a, int b)
 {
 	if (a > b)
@@ -142,7 +139,6 @@ Node* balance(Node* node, Tree* tree)
 }
 
 ///////// A D D   R E C O R D /////////
-
 Node* doAddRecord(Node* node, int newKey, std::string data, Tree* tree)
 {
 	if (node == nullptr)
@@ -176,7 +172,6 @@ void addRecord(Tree* tree, int key, std::string data)
 }
 
 ///////// D E L E T E    W H O L E   T R E E /////////
-
 void doDeleteTree(Node* node)
 {
 	if (node->left != nullptr)
@@ -197,10 +192,10 @@ void deleteTree(Tree* tree)
 		doDeleteTree(tree->root);
 	}
 	delete tree;
+	tree = nullptr;
 }
 
 ///////// G E T   C H I L D'S   K E Y  ( R I G H T   O R   L E F T) /////////
-
 int doGetLeftChild(Node* node)
 {
 	return node->left->key;
@@ -278,6 +273,7 @@ Node* doDeleteNode(Node* node, int key, Tree* tree)
 
 		if (rightSubTree == nullptr)
 		{
+			delete node;
 			return leftSubTree;
 		}
 
