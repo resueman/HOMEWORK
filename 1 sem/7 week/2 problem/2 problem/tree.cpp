@@ -159,8 +159,11 @@ void deleteTree(Tree* tree)
 {
 	if (isEmpty(tree))
 	{
+		delete tree;
+		tree = nullptr;
 		return;
 	}
 	doDeleteTree(tree->root);
 	delete tree;
+	tree = nullptr;
 }
