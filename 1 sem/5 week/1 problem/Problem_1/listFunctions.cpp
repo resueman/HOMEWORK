@@ -47,8 +47,8 @@ void deleteHead(List &list)
 {
 	if (list.head->next == nullptr)
 	{
-		list.head = nullptr;
 		delete list.head;
+		list.head = nullptr;
 	}
 	else
 	{
@@ -114,5 +114,15 @@ void printList(List &list)
 	{
 		std::cout << current->data << " ";
 		current = current->next;
+	}
+}
+
+void deleteList(List &list)
+{
+	while (!isEmpty(list))
+	{
+		auto temp = list.head;
+		list.head = list.head->next;
+		delete temp;
 	}
 }

@@ -59,6 +59,7 @@ int main()
 		List list;
 		cout << "0 - EXIT\n1 - ADD ELEMENT\n2 - DELETE ELEMENT\n3 - PRINT LIST\n4 - CLEAR SCREEN\n\n";
 		interactive(list);
+		deleteList(list);
 	}
 	return 0;
 }

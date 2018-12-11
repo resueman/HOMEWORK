@@ -4,32 +4,33 @@
 
 bool test()
 {
-	List list;
-	whatToDelete(list, 1);
-	addElement(list, 1);
-	whatToDelete(list, 1);
-	addElement(list, 2);
-	whatToDelete(list, 3);
-	whatToDelete(list, 1);
-	addElement(list, 1);
-	addElement(list, 2);
-	addElement(list, 3);
-	whatToDelete(list, 1);
-	whatToDelete(list, 2);
-	whatToDelete(list, 3);
-	whatToDelete(list, 2);
-	addElement(list, 0);
-	addElement(list, 1);
-	addElement(list, 7);
-	whatToDelete(list, 1);
+	List listTest;
+	whatToDelete(listTest, 1);
+	addElement(listTest, 1);
+	whatToDelete(listTest, 1);
+	addElement(listTest, 2);
+	whatToDelete(listTest, 3);
+	whatToDelete(listTest, 1);
+	addElement(listTest, 1);
+	addElement(listTest, 2);
+	addElement(listTest, 3);
+	whatToDelete(listTest, 1);
+	whatToDelete(listTest, 2);
+	whatToDelete(listTest, 3);
+	whatToDelete(listTest, 2);
+	addElement(listTest, 0);
+	addElement(listTest, 1);
+	addElement(listTest, 7);
+	whatToDelete(listTest, 1);
 	system("cls");
 	std::string desiredResult = "0 7 ";
 	std::string resultWeGot = "";
-	auto* current = list.head;
+	auto* current = listTest.head;
 	while (current != nullptr)
 	{
 		resultWeGot += std::to_string(current->data) + " ";
 		current = current->next;
 	}
+	deleteList(listTest);
 	return resultWeGot == desiredResult;
 }
