@@ -60,7 +60,7 @@ int main()
 		std::cout << "Program doesn't work ;(";
 		return -1;
 	}
-	std::string str = "";
+	std::string str = "90+";
 	std::cout << "Enter string  ";
 	std::cin >> str;
 	bool result = true;

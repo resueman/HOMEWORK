@@ -35,6 +35,7 @@ int stack::pop(stack::Stack *stack, bool &result)
 	stack->head = stack->head->next;
 	char value = temp->data;
 	delete temp;
+	temp = nullptr;
 	return value;
 }
 
@@ -50,5 +51,8 @@ void stack::deleteStack(stack::Stack *stack)
 		StackElement *temp = stack->head;
 		stack->head = temp->next;
 		delete temp;
+		temp = nullptr;
 	}
+	delete stack;
+	stack = nullptr;
 }
