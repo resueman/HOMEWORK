@@ -31,7 +31,7 @@ char stack::pop(stack::Stack *stack, bool &result)
 		result = false;
 		return -1;
 	}
-	StackElement *temp = stack->head;
+	auto *temp = stack->head;
 	stack->head = stack->head->next;
 	char value = temp->data;
 	delete temp;
@@ -51,4 +51,6 @@ void stack::deleteStack(stack::Stack *stack)
 		stack->head = temp->next;
 		delete temp;
 	}
+	delete stack;
+	stack = nullptr;
 }

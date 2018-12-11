@@ -18,6 +18,7 @@ bool checkBalance(const std::string & str, bool &result)
 		{
 			if (pop(stack, result) != '[')
 			{
+				deleteStack(stack);
 				return false;
 			}
 		}
@@ -25,6 +26,7 @@ bool checkBalance(const std::string & str, bool &result)
 		{
 			if (pop(stack, result) != '(')
 			{
+				deleteStack(stack);
 				return false;
 			}
 		}
@@ -32,6 +34,7 @@ bool checkBalance(const std::string & str, bool &result)
 		{
 			if (pop(stack, result) != '{')
 			{
+				deleteStack(stack);
 				return false;
 			}
 		}
@@ -60,6 +63,5 @@ int main()
 	{
 		std::cout << "No balance";
 	}
-	
 	return 0;
 }
