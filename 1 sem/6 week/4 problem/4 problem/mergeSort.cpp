@@ -6,7 +6,7 @@ void splitList(List* list, List *&leftList, List *&rightList)
 	leftList = createList();
 	rightList = createList();
 
-	Node* current = getHead(list);
+	auto* current = getHead(list);
 
 	for (int i = 0; i < listLenght(list) / 2; ++i)
 	{
@@ -22,9 +22,9 @@ void splitList(List* list, List *&leftList, List *&rightList)
 
 void merge(List *&list, List *&leftList, List *&rightList, bool byName)
 {
-	Node* tempLeft = getHead(leftList);
-	Node* tempRight = getHead(rightList);
-	Node* tempResult = getHead(list);
+	auto* tempLeft = getHead(leftList);
+	auto* tempRight = getHead(rightList);
+	auto* tempResult = getHead(list);
 
 	while (tempLeft != nullptr && tempRight != nullptr)
 	{

@@ -5,7 +5,7 @@
 
 bool checkSort(List* list, bool byName)
 {
-	Node* current = getHead(list);
+	auto* current = getHead(list);
 
 	if (byName) 
 	{

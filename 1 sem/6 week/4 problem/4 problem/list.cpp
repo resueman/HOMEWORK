@@ -41,20 +41,19 @@ bool isEmpty(List* list)
 
 void deleteList(List* list)
 {
-	while (list->head != list->tail)
+	while (list->head != nullptr)
 	{
-		Node *temp = list->head;
+		auto *temp = list->head;
 		list->head = list->head->next;
 		delete temp;
 	}
-	delete list->head;
 	delete list;
 	list = nullptr;
 }
 
 void printList(List* list)
 {
-	Node* current = list->head;
+	auto* current = list->head;
 	while (current != nullptr)
 	{
 		std::cout << current->name << "   " << current->number << "\n";
@@ -90,12 +89,12 @@ std::string* getName(Node* node)
 
 std::string* getNumber(Node* node)
 {
-	return &(node->number);
+	return &node->number;
 }
 
 void copyList(List* list, std::string* name, std::string* number)
 {
-	Node* elementToCopy = new Node{ *name, *number, nullptr };
+	auto* elementToCopy = new Node{ *name, *number, nullptr };
 	if (isEmpty(list))
 	{
 		list->head = elementToCopy;
