@@ -1,4 +1,5 @@
 #include "readFromFile.h"
+#include "graph.h"
 #include <fstream>
 #include <istream>
 
@@ -16,6 +17,8 @@ bool readFromFile(const char* fileName, Graph* graph)
 	int numberOfCities = 0;
 	int numberOfRoads = 0;
 	file >> numberOfCities >> numberOfRoads;
+
+	buildGraph(graph, numberOfCities);
 
 	for (int i = 0; i < numberOfRoads; ++i)
 	{

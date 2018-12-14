@@ -22,6 +22,15 @@ Graph* createGraph()
 	return new Graph;
 }
 
+void buildGraph(Graph* graph, const int numberOfCities)
+{
+	graph->vertices.resize(numberOfCities);
+	for (int i = 0; i < numberOfCities; ++i)
+	{
+		graph->vertices[i]->list = createList();
+	}
+}
+
 void deleteGraph(Graph* graph)
 {
 	for (auto &vertex : graph->vertices)
@@ -44,6 +53,20 @@ Vertex* findVertex(Graph* graph, int &vertexNumber)
 			return vertex;
 		}
 	}
+	return nullptr;
+}
+
+void addVertexToGraph(Graph* graph, int &city, int &adjCity, int &pathLenght)
+{
+	if (find(graph->vertices.begin(), graph->vertices.end(), city) == graph->vertices.end())
+	{
+		auto newVertex = new Vertex{ city, 0, nullptr };
+		graph->vertices.push_back(newVertex);
+		add(newVertex->list, adjCity, pathLenght);
+		return;
+	}
+	auto vertex = findVertex(graph, city);
+	add(vertex->list, adjCity, pathLenght);
 }
 
 void assignToState(Graph* graph, int &vertexNumber, int &newState)
@@ -52,15 +75,18 @@ void assignToState(Graph* graph, int &vertexNumber, int &newState)
 	vertex->state = newState;
 }
 
-void addVertexToGraph(Graph* graph, int &city, int &adjCity, int &pathLenght)
+bool assignCity(Graph* graph, int capital)
 {
-	auto vertex = findVertex(graph, city);
-	add(vertex->list, adjCity, pathLenght);
+
 }
 
-void distributeCities(Graph* graph)
-{
+void distributeCities(Graph* graph, const int numberOfStates, const int numberOfCities)
+{	
+	bool allHaveState = false;
+	while (!allHaveState)
+	{
 
+	}
 }
 
 void printResult(Graph* graph)

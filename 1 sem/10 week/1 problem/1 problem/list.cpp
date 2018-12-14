@@ -40,3 +40,12 @@ void add(List* list, const int adjCity, const int pathLenght)
 	list->head = newVertex;
 }
 
+AdjVertex* getHead(List* list)
+{
+	return list->head;
+}
+
+AdjVertex* getNext(AdjVertex* vertex)
+{
+	return vertex->next;
+}
