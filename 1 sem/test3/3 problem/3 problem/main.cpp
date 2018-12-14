@@ -62,7 +62,7 @@ void searchSaddlePoints(int **matrix, const int line, const int column)
 	std::cout << "\n";
 }
 
-void deleteMatrix(int** matrix, int line) 
+void deleteMatrix(int** matrix, const int line) 
 {
 	for (int i = 0; i < line; ++i) 
 	{
