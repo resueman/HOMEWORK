@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <istream>
 
 using namespace std;
 
@@ -29,7 +31,8 @@ int search(const string &str, const string &subStr)
 {
 	if (str.length() < subStr.length() || str == "" || subStr == "")
 	{
-		return -2;
+		cout << "Incorrect input\n";
+		return 0;
 	}
 
 	vector<int> prefix = prefixFunction(subStr);
@@ -44,6 +47,7 @@ int search(const string &str, const string &subStr)
 			++j;
 			if (j == subStr.length())
 			{
+				cout << i - j + 1 << endl;
 				return i - j + 1;
 			} 
 		}
@@ -60,18 +64,74 @@ int search(const string &str, const string &subStr)
 			}
 		}
 	}
-	return -1;
+	cout << "No entries\n";
+
+	return 0;
+}
+
+string readFromFile(const char* fileName)
+{
+	ifstream file;
+	file.open(fileName);
+	string str = "";
+	if (!file.is_open())
+	{
+		return "";
+	}
+	while (!file.eof())
+	{
+		file >> str;
+	}
+	file.close();
+
+	return str;
+}
+
+bool test()
+{
+	string str1 = "";
+	string subStr1 = "";//-2
+
+	string str2 = "aababaabbaabaab";
+	string subStr2 = "aabaa"; //10
+
+	string str3 = "abbabba";
+	string subStr3 = "abbabbabb";//-2
+	
+	string str4 = "abbabbabbac";
+	string subStr4 = "abbb";//-1
+	
+	string str5 = "abcabeabcabcabd";
+	string subStr5 = "abcabd";//10
+
+	string str6 = "aabaabbaaabaabaabaabaabaabbc";
+	string subStr6 = "aabbc";//21
+
+	string str7 = "abcdefghhop";
+	string subStr7 = "fgh";//6
+
+	bool result = search(str1, subStr1) == 0 && search(str2, subStr2) == 10 &&
+		search(str3, subStr3) == 0 && search(str4, subStr4) == 0 &&
+		search(str5, subStr5) == 10 && search(str6, subStr6) == 24 && search(str7, subStr7) == 6;
+	
+	system("cls");
+
+	return result;
 }
 
 int main()
 {
+	if (!test())
+	{
+		cout << ":(";
+		return 1;
+	}
+	string str = readFromFile("file.txt");
 	cout << "Enter string:   ";
-	string str = "";
-	cin >> str;
-	cout << "Enter substring:   ";
 	string subStr = "";
 	cin >> subStr;
-	cout << search(str, subStr);
+
+	search(str, subStr);
 	
 	return 0;
 }
