@@ -12,11 +12,11 @@ vector<int> prefixFunction(const string &str)
 	int numberOfSufEqualPref = 0;
 	for (int i = 1; i < size; ++i)
 	{
-		while (numberOfSufEqualPref > 0 && prefix[i] != prefix[numberOfSufEqualPref])
+		while (numberOfSufEqualPref > 0 && str[i] != str[numberOfSufEqualPref])
 		{
 			numberOfSufEqualPref = prefix[numberOfSufEqualPref - 1];
 		}
-		if (prefix[i] == prefix[numberOfSufEqualPref])
+		if (str[i] == str[numberOfSufEqualPref])
 		{
 			++numberOfSufEqualPref;
 		}
@@ -27,21 +27,51 @@ vector<int> prefixFunction(const string &str)
 
 int search(const string &str, const string &subStr)
 {
-	int result = -1;
-	vector<int> prefix = prefixFunction(str);
+	if (str.length() < subStr.length() || str == "" || subStr == "")
+	{
+		return -2;
+	}
 
-	return result;
+	vector<int> prefix = prefixFunction(subStr);
+	int i = 0;
+	int j = 0;
+	
+	while (i < str.length())
+	{
+		if (str[i] == subStr[j])
+		{
+			++i;
+			++j;
+			if (j == subStr.length())
+			{
+				return i - j + 1;
+			} 
+		}
+		else
+		{
+			if (j != 0)
+			{
+				j = prefix[j - 1];
+				
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+	return -1;
 }
 
 int main()
 {
 	cout << "Enter string:   ";
-	cout << "Enter substring:   ";
 	string str = "";
 	cin >> str;
+	cout << "Enter substring:   ";
 	string subStr = "";
 	cin >> subStr;
-
-
+	cout << search(str, subStr);
+	
 	return 0;
 }
