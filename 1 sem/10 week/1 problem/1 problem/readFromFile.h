@@ -2,4 +2,5 @@
 
 #include "graph.h"
 
-bool readFromFile(const char* fileName, Graph* graph, vector<int> &states, set<int> noStateVertecies);
+///read data from file, put it to graph
+bool readFromFile(const char* fileName, Graph* graph, std::vector<int> &states, std::set<int> &noStateVertecies);

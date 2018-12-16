@@ -1,5 +1,4 @@
 #include "readFromFile.h"
-#include <set>
 
 using namespace std;
 
@@ -16,9 +15,9 @@ int main()
 	set<int> noStateVertecies;
 	vector<int> states;
 	readFromFile("file.txt", graph, states, noStateVertecies);
-	distributeCities(graph, noStateVertecies);
-	//printResult(graph);
+	distributeCities(graph, states, noStateVertecies);
+	printResult(graph, states);
 	deleteGraph(graph);
-
+	
 	return 0;
 }

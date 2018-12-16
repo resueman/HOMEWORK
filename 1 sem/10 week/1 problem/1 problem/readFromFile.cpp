@@ -1,9 +1,8 @@
 #include "readFromFile.h"
-#include "graph.h"
+
 #include <fstream>
 #include <istream>
-#include <queue>
-#include <set>
+
 using namespace std;
 
 bool readFromFile(const char* fileName, Graph* graph, vector<int> &states, set<int> &noStateVertecies)

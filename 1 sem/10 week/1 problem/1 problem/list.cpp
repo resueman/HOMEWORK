@@ -1,5 +1,4 @@
 #include "list.h"
-#include <iostream>
 
 struct AdjVertex
 {
@@ -8,17 +7,17 @@ struct AdjVertex
 	AdjVertex* next = nullptr;
 };
 
-struct List
+struct AdjVertList
 {
 	AdjVertex* head = nullptr;
 };
 
-List* createList()
+AdjVertList* createList()
 {
-	return new List;
+	return new AdjVertList;
 }
 
-void deleteList(List *list)
+void deleteList(AdjVertList *list)
 {
 	while (list->head != nullptr)
 	{
@@ -30,12 +29,12 @@ void deleteList(List *list)
 	list = nullptr;
 }
 
-bool isEmpty(List* list)
+bool isEmpty(AdjVertList* list)
 {
 	return list->head == nullptr;
 }
 
-void add(List*& list, const int adjCity, const int pathLenght)
+void add(AdjVertList*& list, const int adjCity, const int pathLenght)
 {
 	if (list == nullptr)
 	{
@@ -45,7 +44,7 @@ void add(List*& list, const int adjCity, const int pathLenght)
 	list->head = newVertex;
 }
 
-AdjVertex* getHead(List* list)
+AdjVertex* getHead(AdjVertList* list)
 {
 	return list->head;
 }

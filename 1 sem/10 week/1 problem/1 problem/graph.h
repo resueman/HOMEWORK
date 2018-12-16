@@ -1,19 +1,27 @@
 #pragma once
 
 #include <vector>
+#include <set>
 
 struct Graph;
 
+///create graph
 Graph* createGraph();
 
+///delete graph
 void deleteGraph(Graph* graph);
 
-void distributeCities(Graph* graph, std::vector<int> &states);
+///distribute cities between states
+void distributeCities(Graph* graph, std::vector<int> &states, std::set<int> &noStateVertecies);
 
+///change state of city(when state assigns city, city gets new state number)
+void changeState(Graph* graph, const int vertexNumber, const int newState);
+
+///add vertex to adjacent list
+void addToAdjList(Graph* graph, const int city,const int adjCity,const int pathLenght);
+
+///add vertex to set of vertecies(to vector "vertecies")
+void addToSet(Graph* graph, const int city, bool result);
+
+///print capitals and cities, which belong to them
 void printResult(Graph* graph, std::vector<int> &states);
-
-void changeState(Graph* graph, const int &vertexNumber, const int &newState);
-
-void addToAdjList(Graph* graph, const int &city,const int &adjCity,const int &pathLenght);
-
-void addToSet(Graph* graph, const int &city, bool result);
