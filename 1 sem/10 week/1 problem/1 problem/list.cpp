@@ -49,3 +49,13 @@ AdjVertex* getNext(AdjVertex* vertex)
 {
 	return vertex->next;
 }
+
+int getPath(AdjVertex* vertex)
+{
+	return vertex->pathLenght;
+}
+
+int getNumber(AdjVertex* vertex)
+{
+	return vertex->number;
+}

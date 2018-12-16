@@ -2,10 +2,11 @@
 #include "graph.h"
 #include <fstream>
 #include <istream>
+#include <queue>
 
 using namespace std;
 
-bool readFromFile(const char* fileName, Graph* graph)
+bool readFromFile(const char* fileName, Graph* graph, vector<int> &states)
 {
 	ifstream file;
 	file.open(fileName);
@@ -32,11 +33,13 @@ bool readFromFile(const char* fileName, Graph* graph)
 
 	int numberOfStates = 0;
 	file >> numberOfStates;
+	
 	for (int i = 0; i < numberOfStates; ++i)
 	{
 		int stateNumber = 0;
 		file >> stateNumber;
-		assignToState(graph, stateNumber, stateNumber);
+		changeState(graph, stateNumber, stateNumber);
+		states.push_back(stateNumber);
 	}
 
 	file.close();

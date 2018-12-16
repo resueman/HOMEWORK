@@ -1,18 +1,19 @@
 #pragma once
 
+#include <vector>
+
 struct Graph;
 
 Graph* createGraph();
 
 void deleteGraph(Graph* graph);
 
-void distributeCities(Graph* graph);
+void distributeCities(Graph* graph, std::vector<int> &states);
 
-void printResult(Graph* graph);
+void printResult(Graph* graph, std::vector<int> &states);
 
-void assignToState(Graph* graph, int &vertexNumber, int &newState);
+void changeState(Graph* graph, const int &vertexNumber, const int &newState);
 
-void addVertexToGraph(Graph* graph, int &city, int &adjCity, int &pathLenght);
+void addVertexToGraph(Graph* graph, const int &city,const int &adjCity,const int &pathLenght);
+
 void buildGraph(Graph* graph, const int numberOfCities);
-
-bool assignCity(Vertex* vertex);

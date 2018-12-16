@@ -12,3 +12,5 @@ void deleteList(List *list);
 
 AdjVertex* getHead(List* list);
 AdjVertex* getNext(AdjVertex* vertex);
+int getPath(AdjVertex* vertex);
+int getNumber(AdjVertex* vertex);

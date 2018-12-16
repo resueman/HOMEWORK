@@ -1,7 +1,9 @@
 #include "graph.h"
 #include "list.h"
 #include <iostream>
-#include <vector>
+#include <algorithm>
+#include <queue>
+#include <set>
 
 using namespace std;
 
@@ -44,7 +46,7 @@ void deleteGraph(Graph* graph)
 	graph = nullptr;
 }
 
-Vertex* findVertex(Graph* graph, int &vertexNumber)
+Vertex* findVertex(Graph* graph, const int &vertexNumber)
 {
 	for (auto &vertex : graph->vertices)
 	{
@@ -56,9 +58,21 @@ Vertex* findVertex(Graph* graph, int &vertexNumber)
 	return nullptr;
 }
 
-void addVertexToGraph(Graph* graph, int &city, int &adjCity, int &pathLenght)
+bool isContain(Graph* graph, const int &city)
 {
-	if (find(graph->vertices.begin(), graph->vertices.end(), city) == graph->vertices.end())
+	for (auto vertex : graph->vertices)
+	{
+		if (vertex->number == city)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void addVertexToGraph(Graph* graph, const int &city, const int &adjCity, const int &pathLenght)
+{
+	if(isContain(graph, city))
 	{
 		auto newVertex = new Vertex{ city, 0, nullptr };
 		graph->vertices.push_back(newVertex);
@@ -69,27 +83,84 @@ void addVertexToGraph(Graph* graph, int &city, int &adjCity, int &pathLenght)
 	add(vertex->list, adjCity, pathLenght);
 }
 
-void assignToState(Graph* graph, int &vertexNumber, int &newState)
+void changeState(Graph* graph, const int &vertexNumber, const int &newState)
 {
 	auto vertex = findVertex(graph, vertexNumber);
 	vertex->state = newState;
 }
 
-bool assignCity(Graph* graph, int capital)
+bool assignCity(Graph* graph, int capital, set<int>& free)
 {
-
+	int candidate = 0;
+	int minPath = INT_MAX;
+	for (int i = 0; i < graph->vertices.size(); ++i)
+	{
+		if (graph->vertices[i]->state == capital)
+		{
+			auto current = getHead(graph->vertices[i]->list);
+			while (current != nullptr)
+			{
+				int currentNumber = getNumber(current);
+				int currentPath = getPath(current);
+				if (currentPath < minPath && free.find(currentNumber) != free.end())
+				{
+					minPath = currentPath;
+					candidate = currentNumber;
+				}
+				getNext(current);
+			}
+		}
+	}
+	changeState(graph, candidate, capital);
+	free.erase(candidate);
+	return free.empty();
 }
 
-void distributeCities(Graph* graph, const int numberOfStates, const int numberOfCities)
+void distributeCities(Graph* graph, vector<int> &states)
 {	
-	bool allHaveState = false;
-	while (!allHaveState)
+	set<int> freeVertex;
+	for (int i = 0; i < graph->vertices.size(); ++i)
 	{
-
+		if (graph->vertices[i]->state == 0)
+		{
+			freeVertex.insert(graph->vertices[i]->number);
+		}
+	}
+	bool flag = true;
+	while (flag)
+	{
+		for (int i = 0; i < states.size(); ++i)
+		{
+			flag = assignCity(graph, states[i], freeVertex);
+		}
 	}
 }
 
-void printResult(Graph* graph)
+void printResult(Graph* graph, vector<int> &states)
 {
+	int citiesNum = graph->vertices.size();
+	int statesNum = states.size();
+	vector<vector<int>> st(statesNum, vector<int>(citiesNum));
+	for (int i = 0; i < statesNum; ++i)
+	{
+		st[i][0] = states[i];
+		for (int j = 0; j < citiesNum; ++j)
+		{
+			if (states[i] == graph->vertices[j]->state)
+			{
+				st[i][j] = graph->vertices[j]->number;
+			}
+		}
+	}
 
+	for (int i = 0; i < states.size(); ++i)
+	{
+		cout << "State:  " << st[i][0] << endl;
+		cout << "Cities\n";
+		for (int j = 0; j < graph->vertices.size(); ++j)
+		{
+			cout << st[i][j] << "\n";
+		}
+		cout << endl;
+	}
 }

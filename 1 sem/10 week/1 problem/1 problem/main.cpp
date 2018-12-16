@@ -1,5 +1,6 @@
 #include "readFromFile.h"
-#include "graph.h"
+
+using namespace std;
 
 int main()
 {
@@ -11,9 +12,10 @@ int main()
 	}
 	*/
 	Graph* graph = createGraph();
-	readFromFile("file.txt", graph);
-	distributeCities(graph);
-	printResult(graph);
+	vector<int> states;
+	readFromFile("file.txt", graph, states);
+	distributeCities(graph, states);
+	printResult(graph, states);
 	deleteGraph(graph);
 
 	return 0;
