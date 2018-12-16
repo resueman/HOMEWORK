@@ -1,16 +1,18 @@
 #include "readFromFile.h"
+#include "test.h"
+
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
-	/*
 	if (!test())
 	{
-		std::cout << "Program doesn't work";
+		cout << "Not all tests passed successfully ;(\n";
 		return -1;
 	}
-	*/
+
 	Graph* graph = createGraph();
 	set<int> noStateVertecies;
 	vector<int> states;

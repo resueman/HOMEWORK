@@ -115,7 +115,7 @@ void printResult(Graph* graph, vector<int> &states)
 {
 	for (int i = 0; i < states.size(); ++i)
 	{
-		cout << "Capital:  " << states[i] << endl;
+		cout << "Capital:  " << states[i];
 		cout << "Cities:  ";
 		for (int j = 0; j < graph->vertices.size(); ++j)
 		{
