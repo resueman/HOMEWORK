@@ -9,7 +9,7 @@ int main()
 {
 	if (!test())
 	{
-		cout << "Not all tests passed successfully ;(\n";
+		cout << "\nNot all tests passed successfully ;(\n";
 		return -1;
 	}
 

@@ -66,7 +66,10 @@ void addToAdjList(Graph* graph, const int city, const int adjCity, const int pat
 void changeState(Graph* graph, const int vertexNumber, const int newState)
 {
 	auto vertex = findVertex(graph, vertexNumber);
-	vertex->state = newState;
+	if (vertex != nullptr)
+	{
+		vertex->state = newState;
+	}
 }
 
 bool assignCity(Graph* graph, int capital, set<int>& noStateVertecies)
@@ -115,7 +118,7 @@ void printResult(Graph* graph, vector<int> &states)
 {
 	for (int i = 0; i < states.size(); ++i)
 	{
-		cout << "Capital:  " << states[i];
+		cout << "Capital:  " << states[i] << endl;
 		cout << "Cities:  ";
 		for (int j = 0; j < graph->vertices.size(); ++j)
 		{
@@ -126,4 +129,14 @@ void printResult(Graph* graph, vector<int> &states)
 		}
 		cout << "\n\n";
 	}
+}
+
+vector<int> getAnswer(Graph* graph)
+{
+	vector<int> answers;
+	for (int i = 0; i < graph->vertices.size(); ++i)
+	{
+		answers.push_back(graph->vertices[i]->state);
+	}
+	return answers;
 }

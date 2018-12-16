@@ -13,9 +13,9 @@ bool test()
 	Graph* graph1 = createGraph();
 	readFromFile("test1.txt", graph1, states, noStateVertecies);
 	distributeCities(graph1, states, noStateVertecies);
-	bool result1 = false;
-	result1 = ;
-	if (!result1)
+	vector<int> result1 = getAnswer(graph1);
+	vector<int> desiredResult1 = {1, 1, 4, 6, 6, 4, 6, 4};
+	if (result1 != desiredResult1)
 	{
 		deleteGraph(graph1);
 		return false;
@@ -29,9 +29,9 @@ bool test()
 	Graph* graph2 = createGraph();
 	readFromFile("test2.txt", graph2, states, noStateVertecies);
 	distributeCities(graph2, states, noStateVertecies);
-	bool result2 = false;
-	result2 = ;
-	if (!result2)
+	vector<int> result2 = getAnswer(graph2);
+	vector<int> desiredResult2 = {1, 2, 3};
+	if (result2 != desiredResult2)
 	{
 		deleteGraph(graph2);
 		return false;
@@ -45,9 +45,9 @@ bool test()
 	Graph* graph3 = createGraph();
 	readFromFile("test3.txt", graph3, states, noStateVertecies);
 	distributeCities(graph3, states, noStateVertecies);
-	bool result3 = false;
-	result3 = ;
-	if (!result3)
+	vector<int> result3 = getAnswer(graph3);
+	vector<int> desiredResult3 = {9, 9, 9, 4, 4, 4, 4, 4, 9, 4, 9};
+	if (result3 != desiredResult3)
 	{
 		deleteGraph(graph3);
 		return false;
@@ -57,6 +57,6 @@ bool test()
 	noStateVertecies.clear();
 	states.clear();
 	
-	cout << "All tests passed successfully ;)\n";
+	cout << "\nAll tests passed successfully ;)\n\n";
 	return true;
 }

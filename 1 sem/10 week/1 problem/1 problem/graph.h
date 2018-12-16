@@ -26,3 +26,6 @@ void addToSet(Graph* graph, const int city, bool result);
 
 ///print capitals and cities, which belong to them
 void printResult(Graph* graph, std::vector<int> &states);
+
+///returns number of state for each vertex
+std::vector<int> getAnswer(Graph* graph);
