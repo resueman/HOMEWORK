@@ -1,4 +1,5 @@
 #include "readFromFile.h"
+#include <set>
 
 using namespace std;
 
@@ -12,10 +13,11 @@ int main()
 	}
 	*/
 	Graph* graph = createGraph();
+	set<int> noStateVertecies;
 	vector<int> states;
-	readFromFile("file.txt", graph, states);
-	distributeCities(graph, states);
-	printResult(graph, states);
+	readFromFile("file.txt", graph, states, noStateVertecies);
+	distributeCities(graph, noStateVertecies);
+	//printResult(graph);
 	deleteGraph(graph);
 
 	return 0;

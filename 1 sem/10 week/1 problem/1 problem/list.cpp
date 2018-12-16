@@ -1,4 +1,5 @@
 #include "list.h"
+#include <iostream>
 
 struct AdjVertex
 {
@@ -34,8 +35,12 @@ bool isEmpty(List* list)
 	return list->head == nullptr;
 }
 
-void add(List* list, const int adjCity, const int pathLenght)
+void add(List*& list, const int adjCity, const int pathLenght)
 {
+	if (list == nullptr)
+	{
+		list = createList();
+	}
 	auto newVertex = new AdjVertex{ adjCity, pathLenght, list->head };
 	list->head = newVertex;
 }
