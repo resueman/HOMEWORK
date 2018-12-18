@@ -1,6 +1,7 @@
 #pragma once
 
 struct List;
+
 struct Element;
 
 ///creates list
