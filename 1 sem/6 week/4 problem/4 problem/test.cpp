@@ -3,16 +3,16 @@
 #include "mergeSort.h"
 #include "readFromFile.h"
 
-bool checkSort(List* list, bool byName)
+bool checkSort(List* list, const bool byName)
 {
 	auto* current = getHead(list);
 
 	if (byName) 
 	{
-		bool result = (*getName(current)).compare(*getName(getNext(current))) <= 0;
-		while (getNext(current) != nullptr && result == true)
+		bool result = (getName(current)).compare(getName(getNext(current))) <= 0;
+		while (getNext(current) != nullptr && result)
 		{
-			result = (*getName(current)).compare(*getName(getNext(current))) <= 0;
+			result = (getName(current)).compare(getName(getNext(current))) <= 0;
 			current = getNext(current);
 		}
 		if (!result)
@@ -22,10 +22,10 @@ bool checkSort(List* list, bool byName)
 	}
 	else
 	{
-		bool result = (*getNumber(current)).compare(*getNumber(getNext(current))) <= 0;
+		bool result = (getNumber(current)).compare(getNumber(getNext(current))) <= 0;
 		while (getNext(current) != nullptr && result)
 		{
-			result = (*getNumber(current)).compare(*getNumber(getNext(current))) <= 0;
+			result = (getNumber(current)).compare(getNumber(getNext(current))) <= 0;
 			current = getNext(current);
 		}
 		if (!result)

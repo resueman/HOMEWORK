@@ -12,26 +12,12 @@ struct List
 {
 	Node* head = nullptr;
 	Node* tail = nullptr;
-	int lenght = 0;
+	int length = 0;
 };
 
 List* createList()
 {
 	return new List;
-}
-
-void addDataFromFileToList(List* list, std::string &name, std::string &number)
-{
-	auto newPerson = new Node{ name, number, nullptr };
-	if (isEmpty(list))
-	{
-		list->head = newPerson;
-	}
-	else
-	{
-		list->tail->next = newPerson;
-	}
-	list->tail = newPerson;
 }
 
 bool isEmpty(List* list)
@@ -48,7 +34,6 @@ void deleteList(List* list)
 		delete temp;
 	}
 	delete list;
-	list = nullptr;
 }
 
 void printList(List* list)
@@ -64,12 +49,12 @@ void printList(List* list)
 
 int listLenght(List* list)
 {
-	return list->lenght;
+	return list->length;
 }
 
 void increaseLenght(List* list)
 {
-	list->lenght++;
+	list->length++;
 }
 
 Node* getHead(List* list)
@@ -82,29 +67,29 @@ Node* getNext(Node* node)
 	return node->next;
 }
 
-std::string* getName(Node* node)
+std::string getName(Node* node)
 {
-	return &node->name;
+	return node->name;
 }
 
-std::string* getNumber(Node* node)
+std::string getNumber(Node* node)
 {
-	return &node->number;
+	return node->number;
 }
 
-void copyList(List* list, std::string* name, std::string* number)
+void copyToList(List* list, const std::string &name, const std::string &number)
 {
-	auto* elementToCopy = new Node{ *name, *number, nullptr };
+	auto newElement = new Node{ name, number, nullptr };
 	if (isEmpty(list))
 	{
-		list->head = elementToCopy;
+		list->head = newElement;
 	}
 	else
 	{
-		list->tail->next = elementToCopy;
+		list->tail->next = newElement;
 	}
-	list->tail = elementToCopy;
-	list->lenght++;
+	list->tail = newElement;
+	++list->length;
 }
 
 void copyElement(Node *&nodeTo, Node *&nodeFrom)

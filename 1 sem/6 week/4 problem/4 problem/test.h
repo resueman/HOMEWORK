@@ -1,4 +1,4 @@
 #pragma once
 
 bool test();
-bool checkSort(List* list);
+bool checkSort(List* list, const bool byName);

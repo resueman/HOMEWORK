@@ -10,17 +10,17 @@ void splitList(List* list, List *&leftList, List *&rightList)
 
 	for (int i = 0; i < listLenght(list) / 2; ++i)
 	{
-		copyList(leftList, getName(current), getNumber(current));
+		copyToList(leftList, getName(current), getNumber(current));
 		current = getNext(current);
 	}
 	for (int i = listLenght(list) / 2; i < listLenght(list); ++i)
 	{
-		copyList(rightList, getName(current), getNumber(current));
+		copyToList(rightList, getName(current), getNumber(current));
 		current = getNext(current);
 	}
 }
 
-void merge(List *&list, List *&leftList, List *&rightList, bool byName)
+void merge(List *&list, List *&leftList, List *&rightList, const bool byName)
 {
 	auto* tempLeft = getHead(leftList);
 	auto* tempRight = getHead(rightList);
@@ -31,11 +31,11 @@ void merge(List *&list, List *&leftList, List *&rightList, bool byName)
 		bool result = true;
 		if (byName)
 		{
-			result = (*getName(tempLeft)).compare(*getName(tempRight)) < 0;
+			result = (getName(tempLeft)).compare(getName(tempRight)) < 0;
 		}
 		else
 		{
-			result = (*getNumber(tempLeft)).compare(*getNumber(tempRight)) < 0;
+			result = (getNumber(tempLeft)).compare(getNumber(tempRight)) < 0;
 		}
 
 		if (result)
@@ -64,7 +64,7 @@ void merge(List *&list, List *&leftList, List *&rightList, bool byName)
 	}
 }
 
-void mergeSortRecursive(List* list, bool byName)
+void mergeSortRecursive(List* list, const bool byName)
 {
 	if (listLenght(list) == 1)
 	{
@@ -75,7 +75,7 @@ void mergeSortRecursive(List* list, bool byName)
 	List* rightList = nullptr;
 	 
 	splitList(list, leftList, rightList);
-
+	
 	mergeSortRecursive(leftList, byName);
 	mergeSortRecursive(rightList, byName);
 	merge(list, leftList, rightList, byName);

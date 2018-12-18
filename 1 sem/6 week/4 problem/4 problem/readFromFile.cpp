@@ -19,8 +19,7 @@ bool readFromFile(const char* fileName, List* list)
 		string name = "";
 		string number = "";
 		file >> name >> number;
-		addDataFromFileToList(list, name, number);
-		increaseLenght(list);
+		copyToList(list, name, number);
 	}
 	file.close();
 	return true;
