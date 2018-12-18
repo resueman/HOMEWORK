@@ -163,7 +163,7 @@ void deleteElement(List* list, const int position)
 	{
 		deleteHead(list);
 	}
-	else if (position == list->lenght)
+	else if (position == list->lenght - 1)
 	{
 		deleteTail(list);
 	}

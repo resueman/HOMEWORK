@@ -62,7 +62,7 @@ bool test()
 	addElement(listTest, 1, 3);
 	addElement(listTest, 3, 5);
 
-	bool result1 = printList(listTest) == "5 6 4 1 7 1 ";
+	bool result1 = printList(listTest) == "5 6 4 1 7 3 ";
 	if (!result1)
 	{
 		cout << "test 1 not passed\n";
