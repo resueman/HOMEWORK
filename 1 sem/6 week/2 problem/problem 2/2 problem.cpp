@@ -4,10 +4,11 @@
 
 using namespace stack;
 
-bool checkBalance(const std::string & str, bool &result)
+bool checkBalance(const std::string & str)
 {
 	Stack *stack = createStack();
 	int length = str.length();
+	bool result = true;
 	for (int i = 0; i < length; ++i)
 	{
 		if (str[i] == '[' || str[i] == '(' || str[i] == '{')
@@ -54,8 +55,7 @@ int main()
 	std::string str = "";
 	std::cout << "Enter string  ";
 	std::cin >> str;
-	bool result = true;
-	if (checkBalance(str, result))
+	if (checkBalance(str))
 	{
 		std::cout << "Balance";
 	}
