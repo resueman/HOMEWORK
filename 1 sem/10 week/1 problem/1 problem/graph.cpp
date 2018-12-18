@@ -72,7 +72,7 @@ void changeState(Graph* graph, const int vertexNumber, const int newState)
 	}
 }
 
-bool assignCity(Graph* graph, int capital, set<int>& noStateVertecies)
+bool assignCity(Graph* graph, int capital, set<int> &noStateVertecies)
 {
 	int candidate = 0;
 	int minPath = INT_MAX;
