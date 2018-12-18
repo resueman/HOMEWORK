@@ -19,22 +19,27 @@ void interactive(List *list)
 			return;
 		case 1:
 		{
+			cout << "Enter value:  ";
 			int value = 0;
 			cin >> value;
-			addElement(list, value);
+			cout << "Enter position(add):  ";
+			int position = 0;
+			cin >> position;
+			addElement(list, value, position);
 			cout << endl;
 		}
 		break;
 		case 2:
 		{
-			int elementToDelete = 0;
-			cin >> elementToDelete;
-			whatToDelete(list, elementToDelete);
+			cout << "Enter position(delete):  ";
+			int position = 0;
+			cin >> position;
+			deleteElement(list, position);
 			cout << endl;
 		}
 		break;
 		case 3:
-			printList(list);
+			cout << printList(list);
 			break;
 		case 4:
 			system("cls");
@@ -47,13 +52,59 @@ void interactive(List *list)
 	} while (userChoice != 0);
 }
 
+bool test()
+{
+	List* listTest = createList();
+	addElement(listTest, 4, 1);
+	addElement(listTest, 5, 0);
+	addElement(listTest, 7, 2);
+	addElement(listTest, 6, 1);
+	addElement(listTest, 1, 3);
+	addElement(listTest, 3, 5);
+
+	bool result1 = printList(listTest) == "5 6 4 1 7 1 ";
+	if (!result1)
+	{
+		cout << "test 1 not passed\n";
+		deleteList(listTest);
+		return false;
+	}
+
+	deleteElement(listTest, 5);
+	deleteElement(listTest, 1);
+	deleteElement(listTest, 2);
+	deleteElement(listTest, 0);
+	
+	bool result2 = printList(listTest) == "4 7 ";
+	if (!result2)
+	{
+		cout << "test 2 not passed\n";
+		deleteList(listTest);
+		return false;
+	}
+
+	deleteElement(listTest, 0);
+	deleteElement(listTest, 0);
+	bool result3 = printList(listTest) == "No elements in list\n";
+	if (!result2)
+	{
+		cout << "test 3 not passed\n";
+		deleteList(listTest);
+		return false;
+	}
+
+	cout << "All tests passed";
+	deleteList(listTest);
+	return true;
+}
+
 int main()
 {
-	/*if (!test())
+	if (!test())
 	{
 		cout << "Everything is bad ;(";
 		return 1;
-	}*/
+	}
 	
 	List* list = createList();
 	cout << "0 - EXIT\n1 - ADD ELEMENT\n2 - DELETE ELEMENT\n3 - PRINT LIST\n4 - CLEAR SCREEN\n\n";

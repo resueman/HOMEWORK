@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct List;
 
 ///creates list
@@ -11,11 +13,11 @@ void deleteList(List* list);
 ///check if list is empty
 bool isEmpty(List* list);
 
-///add element to list
+///add element to list by position
 void addElement(List* list, const int value, const int position);
 
-///determine position of element that should be deleted
+///add element to list by position
+void deleteElement(List* list, const int position);
 
-
-///this function prints list :)
-void printList(List* list);
+///this function prints list
+std::string printList(List* list);

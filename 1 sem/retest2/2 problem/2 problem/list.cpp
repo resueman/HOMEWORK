@@ -1,6 +1,8 @@
 #include <iostream>
 #include "list.h"
 
+using namespace std;
+
 struct Element
 {
 	int data = 0;
@@ -20,29 +22,39 @@ List* createList()
 	return new List;
 }
 
-void deleteList(List* list)//////////////////
+void deleteList(List* list)
 {
-	while (!isEmpty(list))
+	if (isEmpty(list))
+	{
+		return;
+	}
+	while (list->head != list->tail)
 	{
 		auto temp = list->head;
 		list->head = list->head->next;
 		delete temp;
 	}
+	delete list->head;
+	list->head = nullptr;
+	list->tail = nullptr;
 	delete list;
 }
 
-void printList(List* list)
+string printList(List* list)
 {
+	string result = "";
 	if (isEmpty(list))
 	{
-		std::cout << "No elements in list\n";
+		result = "No elements in list\n";
+		return result;
 	}
 	auto current = list->head;
 	while (current != nullptr)
 	{
-		std::cout << current->data << " ";
+		result +=  to_string(current->data) + " ";
 		current = current->next;
 	}
+	return result;
 }
 
 bool isEmpty(List* list)
