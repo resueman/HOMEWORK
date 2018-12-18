@@ -43,7 +43,7 @@ int calculation(const std::string &str, bool &result)
 			const char numInStr = str[i];
 			if (numInStr >= '0' && numInStr <= '9')
 			{
-				const int numInInt = atoi(&numInStr);
+				const int numInInt = numInStr - '0';
 				push(stack, numInInt);
 			}
 		}
@@ -60,7 +60,7 @@ int main()
 		std::cout << "Program doesn't work ;(";
 		return -1;
 	}
-	std::string str = "90+";
+	std::string str = "";
 	std::cout << "Enter string  ";
 	std::cin >> str;
 	bool result = true;
