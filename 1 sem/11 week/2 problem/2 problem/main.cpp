@@ -13,7 +13,7 @@ int main()
 	}
 	*/
 	Graph* graph = graphBuilding("file.txt");
-	printAdjMatrix(graph);
+	
 	deleteGraph(graph);
 
 	return 0;
