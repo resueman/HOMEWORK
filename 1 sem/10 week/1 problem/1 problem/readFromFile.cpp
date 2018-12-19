@@ -28,7 +28,7 @@ bool readFromFile(const char* fileName, Graph* graph, vector<int> &states, set<i
 		bool result1 = noStateVertecies.find(city1) == noStateVertecies.end();
 		bool result2 = noStateVertecies.find(city2) == noStateVertecies.end();
 		
-		addToSet(graph, city1, result1);
+		addToSet(graph, city1, result1);//
 		addToSet(graph, city2, result2);
 
 		addToAdjList(graph, city1, city2, pathLenght);

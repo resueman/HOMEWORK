@@ -32,7 +32,6 @@ void deleteGraph(Graph* graph)
 	}
 	graph->vertices.clear();
 	delete graph;
-	graph = nullptr;
 }
 
 Vertex* findVertex(Graph* graph, const int vertexNumber)
