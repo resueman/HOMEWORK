@@ -26,7 +26,6 @@ void deleteList(List* list)
 		delete temp;
 	}
 	delete list;
-	list = nullptr;
 }
 
 bool isEmpty(List* list)
@@ -49,20 +48,14 @@ int getData(Element* element)
 	return element->data;
 }
 
-Element *previousLessElement(List* list, Element* current)
+Element *previousLessElement(List* list, const int data)
 {
-	Element* previous = list->head;
-	while (previous->next != nullptr && previous->next->data < current->data)
+	if (isEmpty(list) || data <= list->head->data)
 	{
-		previous = previous->next;
+		return nullptr;
 	}
-	return previous;
-}
-
-Element* previousElement(List* list, Element* current)
-{
 	Element* previous = list->head;
-	while (previous->next != current)
+	while (previous->next != nullptr && previous->next->data < data)
 	{
 		previous = previous->next;
 	}
@@ -75,19 +68,23 @@ void addElement(List* list, int value)
 	if (isEmpty(list))
 	{
 		list->head = elemToAdd;
+		return;
 	}
-	else
+	auto previousElement = previousLessElement(list, elemToAdd->data);
+	if (previousElement != nullptr)//middle
 	{
-		if (value < list->head->data)
+		if (previousElement->next == nullptr)//tail
 		{
-			elemToAdd->next = list->head;
-			list->head = elemToAdd;
+			previousElement->next = elemToAdd;
+			return;
 		}
-		else
-		{
-			elemToAdd->next = previousLessElement(list, elemToAdd)->next;
-			previousLessElement(list, elemToAdd)->next = elemToAdd;
-		}
+		elemToAdd->next = previousElement->next;
+		previousElement->next = elemToAdd;
+	}
+	else if (list->head->data > value)//head
+	{
+		elemToAdd->next = list->head;
+		list->head = elemToAdd;
 	}
 }
 
@@ -96,7 +93,6 @@ void deleteHead(List* list)
 	if (list->head->next == nullptr)
 	{
 		delete list->head;
-		list->head = nullptr;
 	}
 	else
 	{
@@ -106,43 +102,43 @@ void deleteHead(List* list)
 	}
 }
 
-void deleteTail(List* list, Element* elementToDeletePrev)//check
+void deleteTail(List* list)
 {
-	elementToDeletePrev->next = nullptr;
-	delete elementToDeletePrev->next;
+	auto current = list->head;
+	while (current->next->next != nullptr)
+	{
+		current = current->next;
+	}
+	current->next = nullptr;
+	delete current->next;
 }
 
-void deleteMiddle(List* list, Element* elementToDeletePrev)//check
+void deleteMiddle(List* list, Element* elementToDeletePrev)
 {
 	elementToDeletePrev->next = elementToDeletePrev->next->next;
 	delete elementToDeletePrev;
 }
 
-void whatToDelete(List* list, int valueToDelete)//change
+void whatToDelete(List* list, int valueToDelete)
 {
-	auto elementToDeletePrev = list->head;
-	while ((elementToDeletePrev->next != nullptr) && (elementToDeletePrev->next->data != valueToDelete))
+	auto previous = previousLessElement(list, valueToDelete);
+	
+	if (!isEmpty(list) && valueToDelete == list->head->data)
 	{
-		elementToDeletePrev = elementToDeletePrev->next;
+		deleteHead(list);
 	}
-	if (elementToDeletePrev == nullptr)
+	else if (!previous || previous->data != valueToDelete)
 	{
-		std::cout << "No such element in a list\n";
+		std::cout << "No such element in a list";
+		return;
+	}
+	else if (previous->next == nullptr)
+	{
+		deleteTail(list);
 	}
 	else
 	{
-		if (elementToDeletePrev == list->head)
-		{
-			deleteHead(list);
-		}
-		else if (elementToDeletePrev->next == nullptr)
-		{
-			deleteTail(list, elementToDeletePrev);
-		}
-		else
-		{
-			deleteMiddle(list, elementToDeletePrev);
-		}
+		deleteMiddle(list, previous);
 	}
 }
 
