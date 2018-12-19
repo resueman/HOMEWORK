@@ -1,3 +1,5 @@
+#include "priorityQueue.h"
+#include "graph.h"
 #include <vector>
 #include <iostream>
 
@@ -29,4 +31,11 @@ void addToGraph(Graph* graph, const int element, const int linePosition, const i
 {
 	graph->verticesMatrix[linePosition][columnPosition] = element;
 	graph->verticesMatrix[columnPosition][linePosition] = element;
+}
+
+void primFinfMST(Graph* graph)
+{
+
+
+
 }
