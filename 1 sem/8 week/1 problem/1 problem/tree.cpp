@@ -28,7 +28,7 @@ Tree* createTree()
 }
 
 ///////// G E T   D A T A   B Y   K E Y /////////
-std::string doGetDataByKey(Node* node, int desiredKey)
+std::string doGetDataByKey(Node* node, const int desiredKey)
 {
 	if (node == nullptr)
 	{
@@ -48,19 +48,19 @@ std::string doGetDataByKey(Node* node, int desiredKey)
 	}
 }
 
-std::string getDataByKey(Tree* tree, int key)
+std::string getDataByKey(Tree* tree, const int key)
 {
 	return doGetDataByKey(tree->root, key);
 }
 
 ///////// E X I S T E N C E /////////
-bool exists(Tree* tree, int key)
+bool exists(Tree* tree, const int key)
 {
 	return getDataByKey(tree, key) != "";
 }
 
 ///////// B A L A N C E /////////
-int max(int a, int b)
+int max(const int a, const int b)
 {
 	if (a > b)
 	{
@@ -139,7 +139,7 @@ Node* balance(Node* node, Tree* tree)
 }
 
 ///////// A D D   R E C O R D /////////
-Node* doAddRecord(Node* node, int newKey, std::string data, Tree* tree)
+Node* doAddRecord(Node* node, const int newKey, const std::string &data, Tree* tree)
 {
 	if (node == nullptr)
 	{
@@ -161,7 +161,7 @@ Node* doAddRecord(Node* node, int newKey, std::string data, Tree* tree)
 	return balance(node, tree);
 }
 
-void addRecord(Tree* tree, int key, std::string data)
+void addRecord(Tree* tree, const int key, const std::string &data)
 {
 	if (isEmpty(tree))
 	{
@@ -206,7 +206,7 @@ int doGetRightChild(Node* node)
 	return node->right->key;
 }
 
-Node* getOwner(Node* node, int desiredKey)
+Node* getOwner(Node* node, const int desiredKey)
 {
 	if (node->key > desiredKey)
 	{
@@ -222,12 +222,12 @@ Node* getOwner(Node* node, int desiredKey)
 	}
 }
 
-int getRightChild(Tree* tree, int key)
+int getRightChild(Tree* tree, const int key)
 {
 	return doGetRightChild(getOwner(tree->root, key));
 }
 
-int getLeftChild(Tree* tree, int key)
+int getLeftChild(Tree* tree, const int key)
 {
 	return doGetLeftChild(getOwner(tree->root, key));
 }
@@ -252,7 +252,7 @@ Node* deleteMinKey(Node* node, Tree* tree)
 	return balance(node, tree);
 }
 
-Node* doDeleteNode(Node* node, int key, Tree* tree)
+Node* doDeleteNode(Node* node, const int key, Tree* tree)
 {
 	if (node == nullptr)
 	{
@@ -291,7 +291,7 @@ Node* doDeleteNode(Node* node, int key, Tree* tree)
 	return balance(node, tree);
 }
 
-void deleteNode(Tree* tree, int key)
+void deleteNode(Tree* tree, const int key)
 {
 	if (isEmpty(tree))
 	{
