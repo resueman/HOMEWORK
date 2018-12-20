@@ -11,7 +11,7 @@ int main()
 		std::cout << "Everything is bad ;(";
 		return -1;
 	}
-	std::cout << "Tests passed successfully!";
+	std::cout << "Tests passed successfully!\n";
 	Set* hashTable = createHashTable();
 	readFromFile(hashTable, "file.txt");
 

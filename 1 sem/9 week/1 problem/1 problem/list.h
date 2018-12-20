@@ -27,7 +27,7 @@ void printList(List* list);
 int getListLenght(List* list);
 
 ///returns pointer on list element, where string we need located
-ListElement* findElement(List* list, std::string str);
+ListElement* findElement(List* list, const std::string &str);
 
 ///returns number of reiterations of word (by pointer)
 int getCounterOfReiterations(ListElement* element);

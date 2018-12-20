@@ -91,7 +91,7 @@ int getNumberOfIterations(ListElement* element)
 	return element->counterOfReiterations;
 }
 
-ListElement* findElement(List* list, std::string str)
+ListElement* findElement(List* list, const std::string &str)
 {
 	auto current = list->head;
 	while (current != nullptr && current->word != str)
