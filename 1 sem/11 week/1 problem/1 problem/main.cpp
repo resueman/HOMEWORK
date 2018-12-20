@@ -9,20 +9,20 @@ using namespace std;
 vector<int> prefixFunction(const string &str)
 {
 	const int size = str.length();
-	vector <int> prefix(size); //vector of max own prefixs, which equal to suffix 
+	vector<int> prefix(size); //vector of max own prefixs, which equal to suffix 
 	prefix[0] = 0;
-	int numberOfSufEqualPref = 0;
+	int numberOfSuffixiesEqualToPrefixies = 0;
 	for (int i = 1; i < size; ++i)
 	{
-		while (numberOfSufEqualPref > 0 && str[i] != str[numberOfSufEqualPref])
+		while (numberOfSuffixiesEqualToPrefixies > 0 && str[i] != str[numberOfSuffixiesEqualToPrefixies])
 		{
-			numberOfSufEqualPref = prefix[numberOfSufEqualPref - 1];
+			numberOfSuffixiesEqualToPrefixies = prefix[numberOfSuffixiesEqualToPrefixies - 1];
 		}
-		if (str[i] == str[numberOfSufEqualPref])
+		if (str[i] == str[numberOfSuffixiesEqualToPrefixies])
 		{
-			++numberOfSufEqualPref;
+			++numberOfSuffixiesEqualToPrefixies;
 		}
-		prefix[i] = numberOfSufEqualPref;
+		prefix[i] = numberOfSuffixiesEqualToPrefixies;
 	}
 	return prefix;
 }
