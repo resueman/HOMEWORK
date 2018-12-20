@@ -73,7 +73,7 @@ void mergeSortRecursive(List* list, const bool byName)
 
 	List* leftList = nullptr;
 	List* rightList = nullptr;
-	 
+	
 	splitList(list, leftList, rightList);
 	
 	mergeSortRecursive(leftList, byName);
