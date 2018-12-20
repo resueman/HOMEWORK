@@ -39,7 +39,7 @@ int hashFunction(const std::string &str)
 		hash += hash * randomNumber1 + str[i];
 		randomNumber1 += randomNumber1;
 	}
-	return hash;
+	return abs(hash);
 }
 
 void addToHashTable(Set* hashTable, const std::string &str)
@@ -93,7 +93,7 @@ int maxListLength(Set* hashTable)
 
 int findNumberOfStrReiterations(Set *hashTable, std::string str)
 {
-	int hash = hashFunction(str) % hashTable->buckets.size();
+	int hash = abs(hashFunction(str)) % hashTable->buckets.size();
 	auto element = findElement(hashTable->buckets[hash], str);
 	if (element == nullptr)
 	{

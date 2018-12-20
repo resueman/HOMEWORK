@@ -93,6 +93,10 @@ int getNumberOfIterations(ListElement* element)
 
 ListElement* findElement(List* list, const std::string &str)
 {
+	if (list == nullptr)
+	{
+		return nullptr;
+	}
 	auto current = list->head;
 	while (current != nullptr && current->word != str)
 	{
