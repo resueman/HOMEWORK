@@ -100,16 +100,17 @@ void whatToDelete(List* list, int valueToDelete)
 		return;
 	}
 	auto previous = previousLessElement(list, valueToDelete);
+	if (valueToDelete == list->head->data)
+	{
+		deleteHead(list);
+		return;
+	}
 	if (previous == nullptr || previous->data != valueToDelete)
 	{
 		std::cout << "No such element in a list";
 		return;
 	}
-	if (valueToDelete == list->head->data)
-	{
-		deleteHead(list);
-	}
-	else if (previous->next == nullptr)
+	if (previous->next == nullptr)
 	{
 		deleteTail(list);
 	}
