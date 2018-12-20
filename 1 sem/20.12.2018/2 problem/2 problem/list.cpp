@@ -55,7 +55,6 @@ std::string printList(List* list)
 	if (isEmpty(list))
 	{
 		return "No elements in a list";
-		return;
 	}
 	std::string result = "";
 	auto* current = list->head;
