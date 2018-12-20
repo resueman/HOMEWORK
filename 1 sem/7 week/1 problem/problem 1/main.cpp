@@ -1,6 +1,8 @@
 #include "interaction.h"
 #include "test.h"
 
+#include <iostream>
+
 int main()
 {
 	if (!test())

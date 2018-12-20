@@ -1,5 +1,5 @@
 #include "tree.h"
-#include <string>
+
 #include <iostream>
 
 struct Node
@@ -36,11 +36,11 @@ void deleteSet(Set* set)
 {
 	if (isEmpty(set))
 	{
+		delete set;
 		return;
 	}
 	doDeleteSet(set->root);
 	delete set;
-	set = nullptr;
 }
 
 void addNode(Node* node, int const data)
@@ -141,6 +141,27 @@ int maximum(Node* current)
 	return temp->data;
 }
 
+void deleteNoChildren(Node*& current)
+{
+	auto* temp = current;
+	current = nullptr;
+	delete temp;
+}
+
+void deleteNoLeftChild(Node*& current)
+{
+	auto* temp = current;
+	current = current->rightChild;
+	delete temp;
+}
+
+void deleteNoRightChild(Node*& current)
+{
+	auto* temp = current;
+	current = current->leftChild;
+	delete temp;
+}
+
 void removeNode(Node*& current, int const data)
 {
 	if (current->data > data)
@@ -155,24 +176,15 @@ void removeNode(Node*& current, int const data)
 	{
 		if (current->leftChild == nullptr && current->rightChild == nullptr)
 		{
-			auto* temp = current;
-			current = nullptr;
-			delete temp;
-			return;
+			deleteNoChildren(current);
 		}
 		else if (current->leftChild == nullptr && current->rightChild != nullptr)
 		{
-			auto* temp = current;
-			current = current->rightChild;
-			delete temp;
-			return;
+			deleteNoLeftChild(current);
 		}
 		else if (current->leftChild != nullptr && current->rightChild == nullptr)
 		{
-			auto* temp = current;
-			current = current->leftChild;
-			delete temp;
-			return;
+			deleteNoRightChild(current);
 		}
 		else
 		{
@@ -213,14 +225,15 @@ void doPrintDescendingOrder(Node* node, std::string &resultStr)
 	}
 }
 
-void printDescendingOrder(Set* set, std::string &resultStr)
+std::string printDescendingOrder(Set* set)
 {
 	if (isEmpty(set))
 	{
-		std::cout << "Set is empty";
-		return;
+		return "Set is empty";
 	}
+	std::string resultStr = "";
 	doPrintDescendingOrder(set->root, resultStr);
+	return resultStr;
 }
 
 void doPrintAscendingOrder(Node* node, std::string &resultStr)
@@ -236,12 +249,13 @@ void doPrintAscendingOrder(Node* node, std::string &resultStr)
 	}
 }
 
-void printAscendingOrder(Set* set, std::string &resultStr)
+std::string printAscendingOrder(Set* set)
 {
 	if (isEmpty(set))
 	{
-		std::cout << "Set is empty";
-		return;
+		return  "Set is empty";
 	}
+	std::string resultStr = "";
 	doPrintAscendingOrder(set->root, resultStr);
+	return resultStr;
 }

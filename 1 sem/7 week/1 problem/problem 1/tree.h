@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string> 
+
 struct Set;
 
 ///function that creates set
@@ -19,3 +21,9 @@ bool exists(Set* set, int const data);
 
 ///check if set is empty
 bool isEmpty(Set* set);
+
+///print tree elements in a descending order
+std::string  printDescendingOrder(Set* set);
+
+///print tree elements in an ascending order
+std::string  printAscendingOrder(Set* set);

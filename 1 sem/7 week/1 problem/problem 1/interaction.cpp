@@ -1,6 +1,6 @@
 #include "interaction.h"
+
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -55,10 +55,6 @@ void case3(Set* set)
 	}
 }
 
-void printDescendingOrder(Set* set, std::string &resultStr);
-
-void printAscendingOrder(Set* set, std::string &resultStr);
-
 void interaction()
 {
 	printOptions();
@@ -83,16 +79,12 @@ void interaction()
 			break;
 		case 4:
 		{
-			std::string str = "";
-			printAscendingOrder(set, str);
-			cout << str;
+			cout << printAscendingOrder(set);
 		}
 		break;
 		case 5:
 		{
-			std::string str = "";
-			printDescendingOrder(set, str);
-			cout << str;
+			cout << printDescendingOrder(set);
 		}
 		break;
 		case 6:

@@ -1,5 +1,9 @@
 #include "test.h"
 
+#include <fstream>
+#include <istream>
+#include <iostream>
+
 using namespace std;
 
 int readFromFile(Set *set)
@@ -23,15 +27,15 @@ int readFromFile(Set *set)
 
 bool test()
 {
-	std::string result1 = "";
-	std::string result2 = "";
-	std::string desiredResult1 = "-9 -7 -6 -5 -4 -3 0 1 2 5 6 7 8 ";
-	std::string desiredResult2 = "8 7 6 5 2 1 0 -3 -4 -5 -6 -7 -9 ";
+	string desiredResult1 = "-9 -7 -6 -5 -4 -3 0 1 2 5 6 7 8 ";
+	string desiredResult2 = "8 7 6 5 2 1 0 -3 -4 -5 -6 -7 -9 ";
 	
 	Set *set = createSet();
 	readFromFile(set);
-	printAscendingOrder(set, result1);
-	printDescendingOrder(set, result2);
+	string result1 = printAscendingOrder(set);
+	string result2 = printDescendingOrder(set);
+
 	deleteSet(set);
+
 	return result1 == desiredResult1 && result2 == desiredResult2;
 }
