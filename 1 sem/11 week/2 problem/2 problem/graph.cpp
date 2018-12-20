@@ -35,7 +35,24 @@ void addToGraph(Graph* graph, const int element, const int linePosition, const i
 
 void primFinfMST(Graph* graph)
 {
+	Queue* priorityQueue = createQueue();
+	vector<bool> belongToOstov(graph->verticesMatrix.size());
+	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
+	{
+		belongToOstov.push_back(false);
+		for (int j = 0; j < graph->verticesMatrix.size(); ++j)
+		{
+			if (graph->verticesMatrix[i][j] != 0)
+			{
+				enqueue(priorityQueue, i, j, graph->verticesMatrix[i][j]);
+			}
+		}
+	}
+
+	while (!isEmpty(priorityQueue))
+	{
 
 
+	}
 
 }
