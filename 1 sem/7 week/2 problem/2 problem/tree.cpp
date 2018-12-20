@@ -26,14 +26,14 @@ Node* createNode(FILE *file)
 {
 	char symbol = ' ';
 	Node* newNode = new Node{};
-	fscanf(file, "%c", &symbol);
+	fscanf(file, "%c ", &symbol);
 	if (symbol == '(')
 	{
-		fscanf(file, "%c", &symbol);
+		fscanf(file, "%c ", &symbol);
 		newNode->data = symbol;
 		newNode->leftChild = createNode(file);
 		newNode->rightChild = createNode(file);
-		fscanf(file, "%c", &symbol);
+		fscanf(file, "%c ", &symbol);
 	}
 	else if (isdigit(symbol))
 	{
@@ -64,6 +64,36 @@ Tree* readFromFile(const char* fileName)
 bool isOperator(char symbol)
 {
 	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+}
+
+int calculation(Node* node)
+{
+	switch (node->data)
+	{
+	case '+':
+		return calculation(node->leftChild) + calculation(node->rightChild);
+		break;
+	case '-':
+		return calculation(node->leftChild) - calculation(node->rightChild);
+		break;
+	case '*':
+		return calculation(node->leftChild) * calculation(node->rightChild);
+		break;
+	case '/':
+		return calculation(node->leftChild) / calculation(node->rightChild);
+		break;
+	}
+	return node->data - '0';
+}
+
+int treeValue(Tree* tree)
+{
+	if (isEmpty(tree))
+	{
+		std::cout << "Tree is empty\n";
+		return 0;
+	}
+	return calculation(tree->root);
 }
 
 void doPrintTree(Node* node)
@@ -112,36 +142,6 @@ void printTree(Tree* tree)
 	std::cout << std::endl;
 }
 
-int calculation(Node* node)
-{
-	switch (node->data)
-	{
-	case '+':
-		return calculation(node->leftChild) + calculation(node->rightChild);
-		break;
-	case '-':
-		return calculation(node->leftChild) - calculation(node->rightChild);
-		break;
-	case '*':
-		return calculation(node->leftChild) * calculation(node->rightChild);
-		break;
-	case '/':
-		return calculation(node->leftChild) / calculation(node->rightChild);
-		break;
-	}
-	return node->data - '0';
-}
-
-int treeValue(Tree* tree)
-{
-	if (isEmpty(tree))
-	{
-		std::cout << "Tree is empty\n";
-		return 0;
-	}
-	return calculation(tree->root);
-}
-
 void doDeleteTree(Node* node)
 {
 	if (node->leftChild != nullptr)
@@ -160,10 +160,8 @@ void deleteTree(Tree* tree)
 	if (isEmpty(tree))
 	{
 		delete tree;
-		tree = nullptr;
 		return;
 	}
 	doDeleteTree(tree->root);
 	delete tree;
-	tree = nullptr;
 }
