@@ -109,7 +109,7 @@ void printAnswer(Graph* graph, vector<bool> answer)
 	{
 		if (answer[i])
 		{
-			cout << i << " ";
+			cout << i + 1 << " ";
 		}
 	}
 }
