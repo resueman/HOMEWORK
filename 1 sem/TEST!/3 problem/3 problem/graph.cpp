@@ -29,7 +29,6 @@ void deleteGraph(Graph*& graph)
 void addToGraph(Graph* graph, const int element, const int linePosition, const int columnPosition)
 {
 	graph->verticesMatrix[linePosition][columnPosition] = element;
-	graph->verticesMatrix[columnPosition][linePosition] = element;
 }
 
 void printGraph(Graph* graph)
