@@ -39,7 +39,7 @@ Graph* primFinfMST(Graph* graph)
 	Graph* minSpanningTree = createGraph(graph->verticesMatrix.size());
 	int numberOfVerticesBelongToMST = 0;
 	int currentVertex = 0;
-	while (numberOfVerticesBelongToMST != graph->verticesMatrix.size())
+	while (numberOfVerticesBelongToMST < graph->verticesMatrix.size())
 	{
 		for (int j = 0; j < graph->verticesMatrix.size(); ++j)
 		{
@@ -52,8 +52,8 @@ Graph* primFinfMST(Graph* graph)
 		dequeue(priorityQueue);
 		while (minSpanningTree->verticesMatrix[currentVertex][nextVertex] != 0 && minSpanningTree->verticesMatrix[nextVertex][currentVertex])
 		{
-			dequeue(priorityQueue);
 			nextVertex = getHeadEnd(priorityQueue);
+			dequeue(priorityQueue);
 		}
 		addToGraph(minSpanningTree, graph->verticesMatrix[currentVertex][nextVertex], currentVertex, nextVertex);
 		currentVertex = nextVertex;

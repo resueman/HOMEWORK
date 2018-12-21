@@ -128,6 +128,9 @@
     <ClInclude Include="graphBuilding.h" />
     <ClInclude Include="priorityQueue.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="file.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
