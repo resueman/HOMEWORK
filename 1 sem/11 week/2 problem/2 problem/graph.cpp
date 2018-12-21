@@ -33,26 +33,45 @@ void addToGraph(Graph* graph, const int element, const int linePosition, const i
 	graph->verticesMatrix[columnPosition][linePosition] = element;
 }
 
-void primFinfMST(Graph* graph)
+Graph* primFinfMST(Graph* graph)
 {
 	Queue* priorityQueue = createQueue();
-	vector<bool> belongToOstov(graph->verticesMatrix.size());
-	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
+	Graph* minSpanningTree = createGraph(graph->verticesMatrix.size());
+	int numberOfVerticesBelongToMST = 0;
+	int currentVertex = 0;
+	while (numberOfVerticesBelongToMST != graph->verticesMatrix.size())
 	{
-		belongToOstov.push_back(false);
 		for (int j = 0; j < graph->verticesMatrix.size(); ++j)
 		{
-			if (graph->verticesMatrix[i][j] != 0)
+			if (graph->verticesMatrix[currentVertex][j] != 0 && minSpanningTree->verticesMatrix[currentVertex][j] == 0)
 			{
-				enqueue(priorityQueue, i, j, graph->verticesMatrix[i][j]);
+				enqueue(priorityQueue, currentVertex, j, graph->verticesMatrix[currentVertex][j]);
 			}
 		}
+		int nextVertex = getHeadEnd(priorityQueue);
+		dequeue(priorityQueue);
+		while (minSpanningTree->verticesMatrix[currentVertex][nextVertex] != 0 && minSpanningTree->verticesMatrix[nextVertex][currentVertex])
+		{
+			dequeue(priorityQueue);
+			nextVertex = getHeadEnd(priorityQueue);
+		}
+		addToGraph(minSpanningTree, graph->verticesMatrix[currentVertex][nextVertex], currentVertex, nextVertex);
+		currentVertex = nextVertex;
+		++numberOfVerticesBelongToMST;
 	}
+	deleteQueue(priorityQueue);
+	return minSpanningTree;
+}
 
-	while (!isEmpty(priorityQueue))
+void printGraph(Graph* graph)
+{
+	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
 	{
-
-
+		for (int j = 0; j < graph->verticesMatrix.size(); ++j)
+		{
+			cout << graph->verticesMatrix[i][j] << "  ";
+		}
+		cout << endl;
 	}
-
+	cout << endl;
 }

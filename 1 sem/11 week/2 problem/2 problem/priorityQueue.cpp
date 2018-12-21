@@ -35,6 +35,16 @@ void deleteQueue(Queue*& queue)
 	queue = nullptr;
 }
 
+int getHeadBegin(Queue* queue)
+{
+	return queue->head->begin;
+}
+
+int getHeadEnd(Queue* queue)
+{
+	return queue->head->end;
+}
+
 void dequeue(Queue* queue)
 {
 	if (!isEmpty(queue))

@@ -13,8 +13,11 @@ int main()
 	}
 	*/
 	Graph* graph = graphBuilding("file.txt");
-	
+	Graph* minSpanningTree = primFinfMST(graph);
+	printGraph(graph);
+	printGraph(minSpanningTree);
 	deleteGraph(graph);
+	deleteGraph(minSpanningTree);
 
 	return 0;
 }

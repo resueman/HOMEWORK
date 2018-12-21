@@ -16,3 +16,7 @@ void enqueue(Queue* queue, const int begin, const int end, const int pathLength)
 
 ///delete element from queue
 void dequeue(Queue* queue);
+
+int getHeadBegin(Queue* queue);
+
+int getHeadEnd(Queue* queue);
