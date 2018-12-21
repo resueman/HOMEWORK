@@ -104,15 +104,12 @@ vector<bool> search(Graph* graph)
 
 void printAnswer(Graph* graph, vector<bool> answer)
 {
+	cout << "Answer:  ";
 	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
 	{
 		if (answer[i])
 		{
-			cout << "1 ";
-		}
-		else
-		{
-			cout << "0 ";
+			cout << i << " ";
 		}
 	}
 }
