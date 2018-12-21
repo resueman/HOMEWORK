@@ -8,7 +8,8 @@ int main()
 {
 	Graph* graph = graphBuilding("file.txt");
 	printGraph(graph);
-	search(graph);
+	vector<bool> answer = search(graph);
+	printAnswer(graph, answer);
 	deleteGraph(graph);
 
 	return 0;
