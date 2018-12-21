@@ -41,6 +41,7 @@ void addNode(List* list, const int position, const int data)
 	if (isEmpty(list))
 	{
 		list->head = newNode;
+		list->tail = newNode;
 	}
 	else if (position == list->length + 1)
 	{
@@ -73,7 +74,12 @@ void addNode(List* list, const int position, const int data)
 
 void deleteNode(List* list, const int position)
 {
-	if (isEmpty(list))
+	if (position <= 0 || position > list->length)
+	{
+		std::cout << "No such position";
+		return;
+	}
+	else if (isEmpty(list))
 	{
 		std::cout << "List is empty!\n";
 		return;
@@ -83,11 +89,6 @@ void deleteNode(List* list, const int position)
 		auto* temp = list->head;
 		list->head = temp->next;
 		delete temp;
-	}
-	else if (position <= 0 || position > list->length)
-	{
-		std::cout << "No such position";
-		return;
 	}
 	else
 	{
