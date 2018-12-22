@@ -49,8 +49,8 @@ Graph* primFinfMST(Graph* graph)
 			}
 		}
 		int nextVertex = getHeadEnd(priorityQueue);
-		dequeue(priorityQueue);
-		while (minSpanningTree->verticesMatrix[currentVertex][nextVertex] != 0 && minSpanningTree->verticesMatrix[nextVertex][currentVertex])
+		dequeue(priorityQueue);//check next
+		while (minSpanningTree->verticesMatrix[currentVertex][nextVertex] != 0 && minSpanningTree->verticesMatrix[currentVertex][nextVertex] == 0)
 		{
 			nextVertex = getHeadEnd(priorityQueue);
 			dequeue(priorityQueue);
