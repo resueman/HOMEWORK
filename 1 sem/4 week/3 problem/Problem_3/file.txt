@@ -1,0 +1,7 @@
+q   1
+qw   12
+qwe   123
+masha   9
+petya   8
+sasha   7
+katya   777
