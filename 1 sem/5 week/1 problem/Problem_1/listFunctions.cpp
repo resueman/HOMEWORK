@@ -1,5 +1,5 @@
-#include <iostream>
 #include "listFunctions.h"
+#include <iostream>
 
 struct Element
 {
@@ -10,7 +10,7 @@ struct Element
 struct List
 {
 	Element* head = nullptr;
-	int maximum = INT_MIN;
+	Element* tail = nullptr;
 };
 
 List* createList()
@@ -26,7 +26,7 @@ void addElement(List* list, int value)
 	if (isEmpty(list))
 	{
 		list->head = elemToAdd;
-		list->maximum = elemToAdd->data;
+		list->tail = elemToAdd;
 		return;
 	}
 	if (list->head->data >= value)//head
@@ -35,25 +35,21 @@ void addElement(List* list, int value)
 		list->head = elemToAdd;
 		return;
 	}
-	auto previousElement = previousLessElement(list, elemToAdd->data);
-	if (value >= list->maximum)
+	if (value >= list->tail->data)
 	{
-		list->maximum = value;
-		previousElement->next = elemToAdd;//tail
+		list->tail->next = elemToAdd;
+		list->tail = list->tail->next;//tail
 	}
 	else
 	{
+		auto previousElement = previousLessElement(list, elemToAdd->data);
 		elemToAdd->next = previousElement->next;//middle
 		previousElement->next = elemToAdd;
 	}
 }
 
-Element *previousLessElement(List* list, const int data)
+Element* previousLessElement(List* list, const int data)
 {
-	if (data <= list->head->data)
-	{
-		return nullptr;
-	}
 	Element* previous = list->head;
 	while (previous->next != nullptr && previous->next->data < data)
 	{
@@ -62,57 +58,77 @@ Element *previousLessElement(List* list, const int data)
 	return previous;
 }
 
+Element* getNodeIfExists(List* list, const int data)
+{
+	auto current = list->head;
+	while (current->next != nullptr && current->next->data <= data)
+	{
+		if (current->next->data == data)
+		{
+			return current;
+		}
+		current = current->next;
+	}
+	return nullptr;
+}
+
 void deleteHead(List* list)
 {
-	if (list->head->next == nullptr)
-	{
-		delete list->head;
-	}
-	else
+	if (list->head == list->tail)
 	{
 		Element* temp = list->head;
-		list->head = list->head->next;
 		delete temp;
+		list->head = nullptr;
+		list->tail = nullptr;
+		return;
 	}
+	Element* temp = list->head;
+	list->head = list->head->next;
+	delete temp;
 }
 
 void deleteTail(List* list)
 {
 	auto current = list->head;
-	while (current->next->next != nullptr)
+	while (current->next != list->tail)
 	{
 		current = current->next;
 	}
+	auto* temp = list->tail;
+	list->tail = current;
 	current->next = nullptr;
-	delete current->next;
+	delete temp;
 }
 
 void deleteMiddle(List* list, Element* elementToDeletePrev)
 {
+	auto* temp = elementToDeletePrev->next;
 	elementToDeletePrev->next = elementToDeletePrev->next->next;
-	delete elementToDeletePrev;
+	delete temp;
 }
 
 void whatToDelete(List* list, int valueToDelete)
 {	
 	if (isEmpty(list))
 	{
+		std::cout << "List is empty, nothing to delete\n";
 		return;
 	}
-	auto previous = previousLessElement(list, valueToDelete);
 	if (valueToDelete == list->head->data)
 	{
 		deleteHead(list);
 		return;
 	}
-	if (previous == nullptr || previous->data != valueToDelete)
-	{
-		std::cout << "No such element in a list";
-		return;
-	}
-	if (previous->next == nullptr)
+	if (list->tail->data == valueToDelete)
 	{
 		deleteTail(list);
+		return;
+	}
+	auto previous = getNodeIfExists(list, valueToDelete);
+	if (previous == nullptr)
+	{
+		std::cout << "No such element in a list\n";
+		return;
 	}
 	else
 	{
@@ -132,6 +148,7 @@ void printList(List* list)
 		std::cout << current->data << " ";
 		current = current->next;
 	}
+	std::cout << "\n\n";
 }
 
 void deleteList(List* list)
@@ -163,4 +180,4 @@ Element* getNext(Element* element)
 int getData(Element* element)
 {
 	return element->data;
-}
+

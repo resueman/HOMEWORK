@@ -10,7 +10,7 @@ void interactive(List *list)
 	int userChoice = 0;
 	do
 	{	
-		cout << "Choose option, please \n";
+		cout << "Choose option, please\n";
 		cout << "Your choice: ";
 		cin >> userChoice;
 		switch (userChoice)
@@ -38,7 +38,11 @@ void interactive(List *list)
 			break;
 		case 4:
 			system("cls");
-			cout << "0 - EXIT\n1 - ADD ELEMENT\n2 - DELETE ELEMENT\n3 - PRINT LIST\n4 - CLEAR SCREEN\n\n";
+			cout << "0 - EXIT\n";
+			cout << "1 - ADD ELEMENT\n";
+			cout << "2 - DELETE ELEMENT\n";
+			cout << "3 - PRINT LIST\n";
+			cout << "4 - CLEAR SCREEN\n\n";
 			break;
 		default:
 			cout << "No such option ;(\n";
@@ -54,13 +58,14 @@ int main()
 		cout << "Everything is bad ;(";
 		return 1;
 	}
-	else 
-	{
-		List* list = createList();
-		cout << "0 - EXIT\n1 - ADD ELEMENT\n2 - DELETE ELEMENT\n3 - PRINT LIST\n4 - CLEAR SCREEN\n\n";
-		interactive(list);
-		deleteList(list);
-	}
-
+	List* list = createList();
+	cout << "0 - EXIT\n";
+	cout << "1 - ADD ELEMENT\n";
+	cout << "2 - DELETE ELEMENT\n";
+	cout << "3 - PRINT LIST\n";
+	cout << "4 - CLEAR SCREEN\n\n";
+	interactive(list);
+	deleteList(list);
+	
 	return 0;
 }
