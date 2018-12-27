@@ -74,15 +74,14 @@ Element* getNodeIfExists(List* list, const int data)
 
 void deleteHead(List* list)
 {
+	Element* temp = list->head;
 	if (list->head == list->tail)
 	{
-		Element* temp = list->head;
 		delete temp;
 		list->head = nullptr;
 		list->tail = nullptr;
 		return;
 	}
-	Element* temp = list->head;
 	list->head = list->head->next;
 	delete temp;
 }

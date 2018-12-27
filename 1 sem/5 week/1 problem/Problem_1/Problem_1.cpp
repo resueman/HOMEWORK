@@ -53,7 +53,7 @@ void interactive(List *list)
 
 int main()
 {
-	if(!test())
+	if (!test())
 	{
 		cout << "Everything is bad ;(";
 		return 1;

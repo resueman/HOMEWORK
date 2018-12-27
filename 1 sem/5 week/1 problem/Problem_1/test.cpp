@@ -1,6 +1,8 @@
 #include "listFunctions.h"
 #include "test.h"
 
+#include <string>
+
 std::string listToString(List* list)
 {
 	std::string result = "";
