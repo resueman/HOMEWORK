@@ -122,14 +122,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="graphBuilding.cpp" />
     <ClCompile Include="priorityQueue.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graph.h" />
     <ClInclude Include="graphBuilding.h" />
     <ClInclude Include="priorityQueue.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="file.txt" />
+    <Text Include="test.txt" />
+    <Text Include="testAnswer.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

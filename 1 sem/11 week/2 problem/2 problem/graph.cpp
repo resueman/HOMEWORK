@@ -33,11 +33,23 @@ void addToGraph(Graph* graph, const int element, const int linePosition, const i
 	graph->verticesMatrix[columnPosition][linePosition] = element;
 }
 
-Graph* primFinfMST(Graph* graph)
+bool belongToMST(Graph* graph, const int vertex)
+{
+	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
+	{
+		if (graph->verticesMatrix[vertex][i] != 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+Graph* primFindMST(Graph* graph)
 {
 	Queue* priorityQueue = createQueue();
 	Graph* minSpanningTree = createGraph(graph->verticesMatrix.size());
-	int numberOfVerticesBelongToMST = 0;
+	int numberOfVerticesBelongToMST = 1;
 	int currentVertex = 0;
 	while (numberOfVerticesBelongToMST < graph->verticesMatrix.size())
 	{
@@ -48,13 +60,18 @@ Graph* primFinfMST(Graph* graph)
 				enqueue(priorityQueue, currentVertex, j, graph->verticesMatrix[currentVertex][j]);
 			}
 		}
+
+		currentVertex = getHeadBegin(priorityQueue);
 		int nextVertex = getHeadEnd(priorityQueue);
-		dequeue(priorityQueue);//check next
-		while (minSpanningTree->verticesMatrix[currentVertex][nextVertex] != 0 && minSpanningTree->verticesMatrix[currentVertex][nextVertex] == 0)
+		dequeue(priorityQueue);
+
+		while (belongToMST(minSpanningTree, currentVertex) && belongToMST(minSpanningTree, nextVertex))
 		{
+			currentVertex = getHeadBegin(priorityQueue);
 			nextVertex = getHeadEnd(priorityQueue);
 			dequeue(priorityQueue);
 		}
+
 		addToGraph(minSpanningTree, graph->verticesMatrix[currentVertex][nextVertex], currentVertex, nextVertex);
 		currentVertex = nextVertex;
 		++numberOfVerticesBelongToMST;
@@ -74,4 +91,9 @@ void printGraph(Graph* graph)
 		cout << endl;
 	}
 	cout << endl;
+}
+
+int data(Graph* graph, const int line, const int column)
+{
+	return graph->verticesMatrix[line][column];
 }

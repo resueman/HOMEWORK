@@ -1,19 +1,18 @@
 #include "graphBuilding.h"
-
+#include "test.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-	/*if (!test())
+	if (!test())
 	{
 		cout << ":(";
 		return 1;
 	}
-	*/
 	Graph* graph = graphBuilding("file.txt");
-	Graph* minSpanningTree = primFinfMST(graph);
+	Graph* minSpanningTree = primFindMST(graph);
 	printGraph(graph);
 	printGraph(minSpanningTree);
 	deleteGraph(graph);

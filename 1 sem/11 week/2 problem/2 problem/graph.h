@@ -8,6 +8,8 @@ void deleteGraph(Graph*& graph);
 
 void addToGraph(Graph* graph, const int element, const int linePosition, const int columnPosition);
 
-Graph* primFinfMST(Graph* graph);
+Graph* primFindMST(Graph* graph);
 
 void printGraph(Graph* graph);
+
+int data(Graph* graph, const int line, const int column);
