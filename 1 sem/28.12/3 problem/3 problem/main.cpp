@@ -18,16 +18,15 @@ void swap(visitTime &a, visitTime &b)
 	b = buffer;
 }
 
-int main()
+bool fileReading(std::vector<visitTime> &allVisits)
 {
 	std::ifstream file;
 	file.open("file.txt");
 	if (!file.is_open())
 	{
 		std::cout << "File isn't opened\n";
-		return -1;
+		return false;
 	}
-	std::vector<visitTime> allVisits;
 	visitTime person;
 	while (!file.eof())
 	{
@@ -38,7 +37,11 @@ int main()
 		allVisits.push_back(person);
 	}
 	file.close();
-	
+	return true;
+}
+
+void sort(std::vector<visitTime> &allVisits)
+{
 	for (int i = 0; i < allVisits.size() - 1; ++i)
 	{
 		for (int j = 0; j < allVisits.size() - i - 1; ++j)
@@ -49,6 +52,13 @@ int main()
 			}
 		}
 	}
+}
+
+int main()
+{
+	std::vector<visitTime> allVisits;
+	fileReading(allVisits);
+	sort(allVisits);
 
 	std::vector<int> begin;
 	std::vector<int> end;
