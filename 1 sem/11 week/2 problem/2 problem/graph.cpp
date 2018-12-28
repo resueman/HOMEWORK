@@ -33,20 +33,15 @@ void addToGraph(Graph* graph, const int element, const int linePosition, const i
 	graph->verticesMatrix[columnPosition][linePosition] = element;
 }
 
-bool belongToMST(Graph* graph, const int vertex)
-{
-	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
-	{
-		if (graph->verticesMatrix[vertex][i] != 0)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
 Graph* primFindMST(Graph* graph)
 {
+	vector<bool> belongToMST;
+	belongToMST.resize(graph->verticesMatrix.size());
+	for (int i = 0; i < graph->verticesMatrix.size(); ++i)
+	{
+		belongToMST[i] = false;
+	}
+
 	Queue* priorityQueue = createQueue();
 	Graph* minSpanningTree = createGraph(graph->verticesMatrix.size());
 	int numberOfVerticesBelongToMST = 1;
@@ -65,7 +60,7 @@ Graph* primFindMST(Graph* graph)
 		int nextVertex = getHeadEnd(priorityQueue);
 		dequeue(priorityQueue);
 
-		while (belongToMST(minSpanningTree, currentVertex) && belongToMST(minSpanningTree, nextVertex))
+		while (belongToMST[currentVertex] && belongToMST[nextVertex])
 		{
 			currentVertex = getHeadBegin(priorityQueue);
 			nextVertex = getHeadEnd(priorityQueue);
@@ -73,6 +68,8 @@ Graph* primFindMST(Graph* graph)
 		}
 
 		addToGraph(minSpanningTree, graph->verticesMatrix[currentVertex][nextVertex], currentVertex, nextVertex);
+		belongToMST[currentVertex] = true;
+		belongToMST[nextVertex] = true;
 		currentVertex = nextVertex;
 		++numberOfVerticesBelongToMST;
 	}
