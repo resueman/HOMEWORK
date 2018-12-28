@@ -3,7 +3,7 @@
 #include <istream>
 #include <vector>
 
-struct visitTime
+struct VisitTime
 {
 	int hourBegin = 0;
 	int minuteBegin = 0;
@@ -11,14 +11,14 @@ struct visitTime
 	int minuteEnd = 0;
 };
 
-void swap(visitTime &a, visitTime &b)
+void swap(VisitTime &a, VisitTime &b)
 {
-	visitTime buffer = a;
+	VisitTime buffer = a;
 	a = b;
 	b = buffer;
 }
 
-bool fileReading(std::vector<visitTime> &allVisits)
+bool fileReading(std::vector<VisitTime> &allVisits)
 {
 	std::ifstream file;
 	file.open("test.txt");
@@ -27,7 +27,7 @@ bool fileReading(std::vector<visitTime> &allVisits)
 		std::cout << "File isn't opened\n";
 		return false;
 	}
-	visitTime person;
+	VisitTime person;
 	while (!file.eof())
 	{
 		file >> person.hourBegin;
@@ -40,7 +40,7 @@ bool fileReading(std::vector<visitTime> &allVisits)
 	return true;
 }
 
-void sort(std::vector<visitTime> &allVisits)
+void sort(std::vector<VisitTime> &allVisits)
 {
 	for (int i = 0; i < allVisits.size() - 1; ++i)
 	{
@@ -56,7 +56,7 @@ void sort(std::vector<visitTime> &allVisits)
 
 int main()
 {
-	std::vector<visitTime> allVisits;
+	std::vector<VisitTime> allVisits;
 	fileReading(allVisits);
 	sort(allVisits);
 
