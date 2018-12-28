@@ -21,7 +21,7 @@ void swap(visitTime &a, visitTime &b)
 bool fileReading(std::vector<visitTime> &allVisits)
 {
 	std::ifstream file;
-	file.open("file.txt");
+	file.open("test.txt");
 	if (!file.is_open())
 	{
 		std::cout << "File isn't opened\n";
@@ -80,7 +80,7 @@ int main()
 	
 	int iBegin = 0;
 	int jEnd = 0;
-	while (jEnd < allVisits.size() && iBegin < allVisits.size())
+	while (iBegin < allVisits.size())
 	{
 		if (begin[iBegin] < end[jEnd])
 		{
@@ -100,12 +100,6 @@ int main()
 			--currentNumberOfVisitors;
 			++jEnd;
 		}
-	}
-
-	if (jEnd < allVisits.size())
-	{
-		answerHourEnd = allVisits[iBegin - 1].hourEnd;
-		answerMinuteEnd = allVisits[iBegin - 1].minuteEnd;
 	}
 
 	std::cout << "Max number of visitors:  " << maxNumberOfVisitors << std::endl;
