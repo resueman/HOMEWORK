@@ -78,27 +78,27 @@ int main()
 	int maxNumberOfVisitors = 0;
 	int currentNumberOfVisitors = 0;
 	
-	int iBegin = 0;
-	int jEnd = 0;
-	while (iBegin < allVisits.size())
+	int indexBegin = 0;
+	int indexEnd = 0;
+	while (indexBegin < allVisits.size())
 	{
-		if (begin[iBegin] < end[jEnd])
+		if (begin[indexBegin] < end[indexEnd])
 		{
 			++currentNumberOfVisitors;
 			if (currentNumberOfVisitors > maxNumberOfVisitors)
 			{
 				maxNumberOfVisitors = currentNumberOfVisitors;
-				answerHourBegin = allVisits[iBegin].hourBegin;
-				answerMinuteBegin = allVisits[iBegin].minuteBegin;
+				answerHourBegin = allVisits[indexBegin].hourBegin;
+				answerMinuteBegin = allVisits[indexBegin].minuteBegin;
 			}
-			++iBegin;
+			++indexBegin;
 		}
 		else
 		{
-			answerHourEnd = allVisits[jEnd].hourEnd;
-			answerMinuteEnd = allVisits[jEnd].minuteEnd;
+			answerHourEnd = allVisits[indexEnd].hourEnd;
+			answerMinuteEnd = allVisits[indexEnd].minuteEnd;
 			--currentNumberOfVisitors;
-			++jEnd;
+			++indexEnd;
 		}
 	}
 
