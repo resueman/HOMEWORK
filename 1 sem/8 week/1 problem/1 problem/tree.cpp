@@ -192,7 +192,6 @@ void deleteTree(Tree* tree)
 		doDeleteTree(tree->root);
 	}
 	delete tree;
-	tree = nullptr;
 }
 
 ///////// G E T   C H I L D'S   K E Y  ( R I G H T   O R   L E F T) /////////

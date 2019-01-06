@@ -67,13 +67,13 @@ bool test()
 	std::cout << "Test 3 passed\n"; 
 
 	//TEST 4
-	bool result4 = exists(tree, 2) == true && exists(tree, 7) == true &&
-		exists(tree, 9) == true && exists(tree, 46) == true &&
-		exists(tree, 5) == false && exists(tree, 45) == false &&
-		exists(tree, 17) == false && exists(tree, 89) == true &&
-		exists(tree, 0) == false;
+	bool result4 = exists(tree, 2) && exists(tree, 7) &&
+		exists(tree, 9) && exists(tree, 46) &&
+		!exists(tree, 5) && !exists(tree, 45) &&
+		!exists(tree, 17) && exists(tree, 89) &&
+		!exists(tree, 0);
 	
-	if(!result4)
+	if (!result4)
 	{
 		deleteTree(tree);
 		return false;
