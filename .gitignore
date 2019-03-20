@@ -37,3 +37,7 @@
 *.pdb
 **/Debug
 **/x64
+**/packages
+**/Properties
+**/TestResults
+*.congig
